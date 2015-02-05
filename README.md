@@ -52,14 +52,15 @@
     * process states
     * manage processes, `ps, top`
 
-## The Kernel - Georgi / Jessie
-1. Kernel Basics
+## The Kernel
+1. Kernel Basics  - Georgi / Jessie
     * what is a kernel
     * kernel configuration
     * `sysctl`
     * build your own kernel + name
 
-## Advanced Topics - Jessie
+## Advanced Topics 
+1. Advanced - Jessie
 * How to use strace for diagnostics and debugging
 * What are system calls?
 * What is a namespace?
@@ -76,14 +77,6 @@ Linux Games
 * Guessing games
 * Games with teams
 
-## Advanced Topics
-* How to use strace for diagnostics and debugging
-* What are system calls?
-* What is a namespace?
-* How to use ‘livepatch’
-* Controlling hardware with ioctl
-* Where can I learn more? 
-
 Questions for organiser?
 * How many people?
 Set breaks?
@@ -92,22 +85,3 @@ Food/drinks?
 References
 * [http://training.linuxfoundation.org/linux-courses/linux-system-administration/outline](http://training.linuxfoundation.org/linux-courses/linux-system-administration/outline)
 * [https://www.edx.org/course/introduction-linux-linuxfoundationx-lfs101x-2](https://www.edx.org/course/introduction-linux-linuxfoundationx-lfs101x-2)
-
-Hour Two: The Kernel and the Shell
-* The kernel
-* How to build your own kernel module
-* How to build your own kernel
-* The shell
-* Useful shell commands
-Hour Three: Advanced Topics
-* How to use strace for diagnostics and debugging
-* What are system calls?
-* What is a namespace?
-* How to use ‘livepatch’
-* Controlling hardware with ioctl
-
-
-* Where can I learn more? 
-
-NOTES:
-Should have check your understanding questions for each section

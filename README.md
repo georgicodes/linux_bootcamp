@@ -1,4 +1,11 @@
-# Kernel Hacking with Ladies Who Linux (Workshop)
+# Ladies Who Linux
+![](workshop/images/ladies_who_linux.jpeg)
+
+## Workshops:
+[Linux Bootcamp: From Casual Linux User to Kernel Hacker](workshop)
+
+
+Below is basically a brain dump first draft of things we'd like to cover. Remove me later
 
 ## Laying the foundations
 1. Introduction - All

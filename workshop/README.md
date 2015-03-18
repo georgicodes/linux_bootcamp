@@ -1,14 +1,14 @@
-Ladies Who Linux Workshop
+Linux Bootcamp: From Casual Linux User to Kernel Hacker
 ======================
 
-Here you will find resources for the half-day Kernel Hacking workshop.
+Here you will find resources for the workshop.
 
 ## Part One: Laying the foundations
 * [Introduction](introduction)
 * Files and processes
-* The directory structure
+* [The directory structure](directory)
 * [Boot Process](boot_process)
-* The shell and useful shell commands
+* [The shell](shell)
 
 ## [Part Two: The Kernel](kernel)
 * Kernel architecture 101

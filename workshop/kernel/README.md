@@ -2,22 +2,14 @@
 
 ## Kernel architecture 101
 ![](images/linkux_kernel.png)
-
-The kernel is the heart of an operating system whose job it is to distribute hardware resources to other applications in a controlled way.
-
-The kernel is responsible for process scheduling. At any one time, there are likely to be several programs waiting to run.
-
-The kernel's scheduler allocates CPU time to each one, so that if you look over a longer timescale, a few seconds for example, you have the illusion that the computer is running several programs at the same time.
-
-The kernel is the big chunk of executable code in charge of handling all such requests. 
+SLIDES
 
 ## How to build your own kernel module
 
 ### What are Loadable Kernel Module's (LKMs)?
-Now we have some idea of what the kernel does, let's look briefly at its physical organisation. Early versions of the Linux kernel were large - that is, all the bits and pieces were statically linked into one big executable file.
+SLIDES
 
-But today modern Linux kernels are modular: a lot of the functionality is contained in modules that are loaded into the kernel dynamically. This keeps the core of the kernel small and makes it possible to load or replace modules in a running kernel without rebooting.
-
+**LKM Commands**
 ```bash
 lsmod	# lists currently loaded modules
 modprobe my_module	# loads module and its dependencies
@@ -45,18 +37,11 @@ uname -r 	# displays currently running kernel version
 1. Take a look at `/lib/modules/`uname -r`/modules.dep` and verify the dependencies listed are the same as in `modinfo`
 
 ### Anatomy of a LKM
-
-Writing a kernel module involves including kernel header files. And when the module is loaded it will run entirely in kernel space and needs to be linked against the kernel library routines.
-
-This means the `Makefile` used to build your kernel module must point to a kernel source tree.
-
-Because the modules runs in kernel space this means that it wont print to terminal, instead it will print to a system log file called `/var/log/messages`.
-
-* describe log levels
+SLIDES
 
 #### EXERCISE: Finding out about the kernel tree
 
-TODO find command for a function used?
+TODO find command for a kernel function used?
 eg `module_exit`
 
 #### EXERCISE: Build a kernel module
@@ -81,8 +66,7 @@ TODO: code stub
 1. what happens? check `dmesg` as you are trying this
 
 ### Syscalls
-TODO
-* describe me
+SLIDES
 
 #### EXERCISE: Load an LKM on boot
 
@@ -96,7 +80,7 @@ TODO
 1. verify your module works
 
 ## Patching the kernel
-TODO checkstyle
+SLIDES
 
 #### EXERCISE: Checkstyle
 
@@ -105,9 +89,8 @@ TODO checkstyle
 
 ## How to build and run your own kernel
 
-
 ## How to build your own kernel
-TODO all sections
+SLIDES (makeconfig)
 
 ### Hows does Linux get updated?
 

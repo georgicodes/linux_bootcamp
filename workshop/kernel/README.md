@@ -79,28 +79,26 @@ SLIDES
 1. TODO - more interesting exercies
 1. verify your module works
 
-## Patching the kernel
-SLIDES
-
 #### EXERCISE: Checkstyle
 
 1. find the `checkstyle.pl` script in the kernel source tree (HINT: `checkstyle.pl --file foo.c --no-tree is a good way to check a single file)
 1. run it on your c module file and make updates as suggested
 
-## How to build and run your own kernel
-
 ## How to build your own kernel
-SLIDES (makeconfig)
 
 ### Hows does Linux get updated?
+SLIDES (TODO)
 
 ### Where to retrive the Linux source?
+SLIDES
 
 ### Configure your kernel
+SLIDES (makeconfig)
 
 ### Compile your kernel
+TODO - talk to Jessie, can we do this in allotted time?
 
-### Boot your kernel
+### Boot into your new kernel
 
 ##### References
 * [http://www.tldp.org/HOWTO/Module-HOWTO/index.html](http://www.tldp.org/HOWTO/Module-HOWTO/index.html)

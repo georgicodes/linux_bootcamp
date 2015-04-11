@@ -58,7 +58,7 @@ Monday, April 27   1:00 to 5:30 in room 112
 	* System calls
 	* Kernel v User space
 	* Kernel Modules
-	* How does Linux get updated? - Georgi
+	* How does Linux get updated?
 	    * Explanation of patches + mailing list etc.
 	* Character device drivers
 	* `sysctl` - Jessie

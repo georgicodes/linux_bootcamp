@@ -1,5 +1,10 @@
 # Linux Bootcamp: From Casual Linux User to Kernel Hacker (Workshop)
 
+Session Info:
+[Codepalousa:Linux Bootcamp: From Casual Linux User to Kernel Hacker](http://codepalousa.com/schedule/sessions/linux-bootcamp-from-casual-linux-user-to-kernel-hacker/)
+
+Monday, April 27   1:00 to 5:30 in room 112
+
 ## Laying the foundations
 1. Introduction - All - 30 mins
     * Intro ourselves - All

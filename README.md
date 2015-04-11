@@ -52,7 +52,7 @@ Monday, April 27   1:00 to 5:30 in room 112
 	* manage processes, `ps`, `top`
 
 ## The Kernel
-1. Kernel Basics - Georgi - 60 - 90 mins
+1. Kernel Basics - Georgi - 60 mins +
 	* How to build your own kernel
 	* More about the kernel
 	* System calls
@@ -63,15 +63,15 @@ Monday, April 27   1:00 to 5:30 in room 112
 	* Character device drivers
 	* `sysctl` - Jessie
 
-## Advanced Topics - 15mins +
-1. Advanced - Jessie
+## Advanced Topics 
+1. Advanced - Jessie - 15mins +
 	* How to use `strace` for diagnostics and debugging
 	* What is a namespace?
 	* How to use ‘livepatch’
 	* Controlling hardware with `ioctl`
 
-## Summary - 5 mins
-1. Summary - Georgi
+## Summary
+1. Summary - All - 5 mins
 	* Finale exercise!
 	* Where can I learn more? 
 

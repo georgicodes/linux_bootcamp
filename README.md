@@ -6,7 +6,7 @@ Session Info:
 Monday, April 27   1:00 to 5:30 in room 112
 
 ## Laying the foundations
-1. Introduction - All - 30 mins
+* Introduction - All - 30 mins
 	* Intro ourselves - All
 	* Attendees intro
 	    * Name, Job, How do you currently use Linux?
@@ -16,11 +16,11 @@ Monday, April 27   1:00 to 5:30 in room 112
 	* Talks about how our companies use linux - All
 	* Fun Linux easter eggs - Tammy
 
-1. Boot Process + Kernel Intro - Georgi - 15mins
+* Boot Process + Kernel Intro - Georgi - 15mins
 	* What is the kernel?
 	* Boot process
 
-1. Linux Filesystem - Jessie - 30mins
+* Linux Filesystem - Jessie - 30mins
 	* Filesystem types
 	* Standard disk filesystems: `ext2, ext3, ext4, XFS, Btrfs, JFS, NTFS`
 	* Partitions
@@ -33,7 +33,7 @@ Monday, April 27   1:00 to 5:30 in room 112
 	* Exercises and examples and pictres
 	* `fsck`
 
-1. Command Line - Tammy - 15mins
+* Command Line - Tammy - 15mins
 	* types of shells
 	* getting help - man pages
 	* basic commands `pwd, cd, cd .., ls`
@@ -52,7 +52,7 @@ Monday, April 27   1:00 to 5:30 in room 112
 	* manage processes, `ps`, `top`
 
 ## The Kernel
-1. Kernel Basics - Georgi - 60 mins +
+* Kernel Basics - Georgi - 60 mins +
 	* How to build your own kernel
 	* More about the kernel
 	* System calls
@@ -64,14 +64,14 @@ Monday, April 27   1:00 to 5:30 in room 112
 	* `sysctl` - Jessie
 
 ## Advanced Topics 
-1. Advanced - Jessie - 15mins +
+* Advanced - Jessie - 15mins +
 	* How to use `strace` for diagnostics and debugging
 	* What is a namespace?
 	* How to use ‘livepatch’
 	* Controlling hardware with `ioctl`
 
 ## Summary
-1. Summary - All - 5 mins
+* Summary - All - 5 mins
 	* Finale exercise!
 	* Where can I learn more? 
 

@@ -6,7 +6,7 @@ Session Info:
 Monday, April 27   1:00 to 5:30 in room 112
 
 ## Laying the foundations
-* Introduction - All - 30 mins
+### Introduction - All - 30 mins
 	* Intro ourselves - All
 	* Attendees intro
 	    * Name, Job, How do you currently use Linux?
@@ -16,11 +16,11 @@ Monday, April 27   1:00 to 5:30 in room 112
 	* Talks about how our companies use linux - All
 	* Fun Linux easter eggs - Tammy
 
-* Boot Process + Kernel Intro - Georgi - 15mins
+### Boot Process + Kernel Intro - Georgi - 15mins
 	* What is the kernel?
 	* Boot process
 
-* Linux Filesystem - Jessie - 30mins
+### Linux Filesystem - Jessie - 30mins
 	* Filesystem types
 	* Standard disk filesystems: `ext2, ext3, ext4, XFS, Btrfs, JFS, NTFS`
 	* Partitions
@@ -33,7 +33,7 @@ Monday, April 27   1:00 to 5:30 in room 112
 	* Exercises and examples and pictres
 	* `fsck`
 
-* Command Line - Tammy - 15mins
+### Command Line - Tammy - 15mins
 	* types of shells
 	* getting help - man pages
 	* basic commands `pwd, cd, cd .., ls`
@@ -42,7 +42,7 @@ Monday, April 27   1:00 to 5:30 in room 112
 	* Package Management System
 		* Installing software
 
-1. Processes - Tammy - 15min
+### Processes - Tammy - 15min
 	* what is a process
 	* types of processes
 	* how the shell creates processes 
@@ -52,7 +52,7 @@ Monday, April 27   1:00 to 5:30 in room 112
 	* manage processes, `ps`, `top`
 
 ## The Kernel
-* Kernel Basics - Georgi - 60 mins +
+### Kernel Basics - Georgi - 60 mins +
 	* How to build your own kernel
 	* More about the kernel
 	* System calls
@@ -64,17 +64,13 @@ Monday, April 27   1:00 to 5:30 in room 112
 	* `sysctl` - Jessie
 
 ## Advanced Topics 
-* Advanced - Jessie - 15mins +
+### Advanced - Jessie - 15mins +
 	* How to use `strace` for diagnostics and debugging
 	* What is a namespace?
 	* How to use ‘livepatch’
 	* Controlling hardware with `ioctl`
 
 ## Summary
-* Summary - All - 5 mins
+### Summary - All - 5 mins
 	* Finale exercise!
 	* Where can I learn more? 
-
-References
-* [http://training.linuxfoundation.org/linux-courses/linux-system-administration/outline](http://training.linuxfoundation.org/linux-courses/linux-system-administration/outline)
-* [https://www.edx.org/course/introduction-linux-linuxfoundationx-lfs101x-2](https://www.edx.org/course/introduction-linux-linuxfoundationx-lfs101x-2)

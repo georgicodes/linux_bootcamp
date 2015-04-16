@@ -34,25 +34,34 @@ The second method of creating a config file is to uses the menu UI. It will read
 1. Save and exit
 1. Note down the value of the following configuration setting `CONFIG_LOCALVERSION_AUTO`. Make sure its set to `CONFIG_LOCALVERSION_AUTO=y`. (Setting to be explained in next exercise)
 
-TODO - talk to Jessie, can we do this in allotted time?
 #### EXERCISE: Customizing your kernel release string
 It's always fun to personalize things. The `CONFIG_LOCALVERSION_AUTO=y` config option we set previously allows us to append a version name to our kernel version string.
+
 1. Update the `EXTRAVERSION` field in the `Makefile` found in the root of the kernel source tree. Adding your name here or something silly like `-rainbow-unicorns-rule`. This will be appended to your kernel version name string. Note, start this with a dash `-`.
 1. Now find out what the final kernel release string will be by running `make kernelrelease`.
 
 #### EXERCISE: Configuring for another architecture
 Let's take a brief look at how you would configure your kernel for building on another architecture.
+
 1. `ls arch` lists out all the supported architectures.
 1. `make ARCH=blackfin menuconfig`
 NOTE: you can't actually build a kernel for any other architecture until you install the appropriate cross-compiler toolchain.
 
-#### EXERCISE: Buliding your kernel
+#### EXERCISE: Buliding your kernel - TO DO AT HOME!!
 Install the new (compressed) kernel image into the `/boot` directory so that GRUB can find it at boot time
+
 1. Run the following commands and wait for victory!
 ```bash
 make 	# builds a kernel ready to be installed
 make modules_install: # Installs all of the newly-built modules. They will now show up under a directory in `/lib/modules`
 make install 	#  Install the new (compressed) kernel image into the `/boot` directory so that GRUB can find it at boot time. And it also create a new initrd initial ram disk that goes along with that kernel to support the early part of the boot process
+```
+
+#### EXERCISE: Install a pre-built kernel
+As it will take too long build a kernel in this workshop as asked in exercies "Buliding your kernel", we have gone ahead and built a kernel for you and packaged it up as a debian package. We are going to install this instead.
+
+```bash
+TODO: look at jessie's website and use her packaged kernel version.
 ```
 
 #### EXERCISE: Confirm your build and install worked

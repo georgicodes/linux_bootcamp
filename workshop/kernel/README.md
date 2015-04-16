@@ -1,16 +1,6 @@
 # Kernel   
 
-## Kernel architecture 101
-![](images/linkux_kernel.png)
-SLIDES
-
-## 1. How to configure and build your own kernel
-
-### Hows does Linux get updated?
-SLIDES (TODO)
-
-### How to configure a Linux kernel
-SLIDES
+## How to configure and build your own kernel
 
 #### EXERCISE: Fetch kernel source and create a kernel config file
 This first way to create a config file, is to use the `make localmodconfig` build target. It runs `lsmod` to find all the modules loaded on the current running system and initializes the config with those modules. 
@@ -46,9 +36,10 @@ Let's take a brief look at how you would configure your kernel for building on a
 1. `ls arch` lists out all the supported architectures.
 1. `make ARCH=blackfin menuconfig`
 NOTE: you can't actually build a kernel for any other architecture until you install the appropriate cross-compiler toolchain.
+1. Exit and Save but rename the file to be `.config-blackfin`
 
 #### EXERCISE: Buliding your kernel - TO DO AT HOME!!
-Install the new (compressed) kernel image into the `/boot` directory so that GRUB can find it at boot time
+There are multiple ways that you can build and install your own kernel, here I have presented one way. This will install the new (compressed) kernel image into the `/boot` directory so that GRUB can find it at boot time
 
 1. Run the following commands and wait for victory!
 ```bash
@@ -61,7 +52,11 @@ make install 	#  Install the new (compressed) kernel image into the `/boot` dire
 As it will take too long build a kernel in this workshop as asked in exercies "Buliding your kernel", we have gone ahead and built a kernel for you and packaged it up as a debian package. We are going to install this instead.
 
 ```bash
-TODO: look at jessie's website and use her packaged kernel version.
+cd /usr/src
+# get the pre-built kernel package
+curl -O https://s3-us-west-1.amazonaws.com/jesss/kernels/3.17.3/linux-image-3.17.3_3.17.3_amd64.deb
+# install the new kernel
+dpkg -i ../linux-image-3.17.4_3.17.4_amd64.deb
 ```
 
 #### EXERCISE: Confirm your build and install worked

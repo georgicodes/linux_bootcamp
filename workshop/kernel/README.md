@@ -54,26 +54,25 @@ As it will take too long build a kernel in this workshop as asked in exercies "B
 ```bash
 cd /usr/src
 # get the pre-built kernel package
-curl -O https://s3-us-west-1.amazonaws.com/jesss/kernels/3.17.3/linux-image-3.17.3_3.17.3_amd64.deb
+curl -O http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.0-vivid/linux-image-4.0.0-040000-generic_4.0.0-040000.201504121935_amd64.deb
+curl -O http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.0-vivid/linux-headers-4.0.0-040000-generic_4.0.0-040000.201504121935_amd64.deb
 # install the new kernel
-dpkg -i ../linux-image-3.17.4_3.17.4_amd64.deb
+sudo dpkg -i linux-headers-4.0*.deb linux-image-4.0*.deb
 ```
 
 #### EXERCISE: Confirm your build and install worked
-1. Check for your custome kernel release string with `uname -a`
 1. Take a look at `/boot` and confirm that there is a new vmlinuz, initrd image file and config file corresponding to your build verison.
-1. Take a look at `/lib/modules` has your new modules.
+1. Take a look that `/lib/modules/$KERNEL_VERSION` has your new modules.
 
-### Boot into your new kernel
-TODO is this correct?
-Now your new kernel is built, let's boot into it!
-1. `vim /etc/default/grub` 	# update with any boot loader changes
-1. `grub2-mkconfig -o /boot/grub2/grub.config` # regenerate grub.conf if you made changes
+#### EXERCISE: Boot into your new kernel
+Now your new kernel is built, let's boot into it! GRUB will automatically choose the latest kernel version to boot into. 
+1. `vim /etc/default/grub` 
+1. update the `GRUB_TIMEOUT` value to be 10 seconds or -1 to make it mandatory to choose a version upon every boot
+1. run `update-grub` to regenerate grub.conf changes
+1. `reboot` and now select your newest version of the kernel by selecting 'Advanced options for Debian GNU/Linux' and then the version.
+1. Check for your custom kernel release string with `uname -a`
 
-## 2. How to build your own kernel module
-
-### What are Loadable Kernel Module's (LKMs)?
-SLIDES
+## Loadable Kernel Modules
 
 **Helpful module Commands**
 ```bash
@@ -95,7 +94,7 @@ uname -r 	# displays currently running kernel version
 /lib/modules/`uname -r`/	# where module files are stored
 ```
 
-#### EXERCISE: lsmod
+#### EXERCISE: Learn about `lsmod`
 
 1. Find out what file `lsmod` reads from
 
@@ -108,25 +107,19 @@ uname -r 	# displays currently running kernel version
 1. Find out the names of the other modules that `btrfs` depends on. 
 1. What does  `/lib/modules/`uname -r`/modules.dep` and verify the dependencies listed are the same as in `modinfo`.
 
-### Anatomy of a LKM
-SLIDES
 
-#### EXERCISE: Finding out about the kernel tree
+#### EXERCISE: Build your first kernel module
 
-TODO find command for a kernel function used?
-eg `module_exit`
-
-#### EXERCISE: Build a kernel module
-
-TODO: code stub
-1. checkout base LKM code from [here]()
-1. update the code to print ">>> Hello World! <<<" upon load and ">>> Goodbye Cruel World... <<<" upon unload
-1. build it (HINT: `make`)
+1. the base module code can be found [here](code/hi)
+1. update the licence information to have your name
+1. update the `hello_init` function to printk to debug ">>> Hello World! <<<"
+1. update the `hello_exit` to printk ">>> Goodbye Cruel World... <<<" (HINT: printk(KERN_DEBUG "my msg"))
+1. build it
 1. verify your module works
 
 #### EXERCISE: Returning negative number
 
-1. modify your init method to return -7
+1. modify your `hello_init` function to return -7
 1. build and load it
 1. what happens? check `dmesg` as you are trying this
 
@@ -135,9 +128,6 @@ TODO: code stub
 1. modify your init method to return 7
 1. build and load it
 1. what happens? check `dmesg` as you are trying this
-
-### Syscalls
-SLIDES
 
 #### EXERCISE: Load an LKM on boot
 

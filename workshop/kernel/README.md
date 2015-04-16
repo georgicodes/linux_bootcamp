@@ -151,6 +151,10 @@ SLIDES
 1. find the `checkstyle.pl` script in the kernel source tree (HINT: `checkstyle.pl --file foo.c --no-tree is a good way to check a single file)
 1. run it on your c module file and make updates as suggested
 
+#### EXERCISE: Load a character device driver
+1. build and load `hello_char.c` TODO give dir URL
+1. Prove its been loaded by checking `dmesg`
+1. Check `/proc/devices` and `/proc/modules` for further proof its been loaded
 
 ##### References
 * [http://www.tldp.org/HOWTO/Module-HOWTO/index.html](http://www.tldp.org/HOWTO/Module-HOWTO/index.html)

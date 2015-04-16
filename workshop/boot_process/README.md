@@ -9,6 +9,10 @@
 * init
 * X Windows
 
+EXERCISE:
+TODO
+http://www.ibm.com/developerworks/library/l-initrd/
+
 ## Shutdown/reboot
 
 ## Exercises

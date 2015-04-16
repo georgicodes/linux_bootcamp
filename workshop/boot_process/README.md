@@ -45,5 +45,5 @@ The first line sets the partition that the root filesystem is on. The second lin
 
 
 ##### References
-* ![http://www.ibm.com/developerworks/library/l-initrd/](http://www.ibm.com/developerworks/library/l-initrd/)
+* [http://www.ibm.com/developerworks/library/l-initrd/](http://www.ibm.com/developerworks/library/l-initrd/)
 * [https://www.linux.com/learn/tutorials/776643-how-to-rescue-a-non-booting-grub-2-on-linux/](https://www.linux.com/learn/tutorials/776643-how-to-rescue-a-non-booting-grub-2-on-linux/)

@@ -49,7 +49,7 @@ make install 	#  Install the new (compressed) kernel image into the `/boot` dire
 ```
 
 #### EXERCISE: Install a pre-built kernel
-As it will take too long build a kernel in this workshop as asked in exercies "Buliding your kernel", we have gone ahead and built a kernel for you and packaged it up as a debian package. We are going to install this instead.
+As it will take too long build a kernel in this workshop as asked in exercie "Buliding your kernel" we are going to instead install kernel version 4.0 from the ubuntu kernel mainline repo: [http://kernel.ubuntu.com/~kernel-ppa/mainline/](http://kernel.ubuntu.com/~kernel-ppa/mainline/).
 
 ```bash
 cd /usr/src
@@ -67,6 +67,7 @@ sudo dpkg -i linux-headers-4.0*.deb linux-image-4.0*.deb
 
 #### EXERCISE: Boot into your new kernel
 Now your new kernel is built, let's boot into it! GRUB will automatically choose the latest kernel version to boot into. 
+
 1. `vim /etc/default/grub` 
 1. update the `GRUB_TIMEOUT` value to be 10 seconds or -1 to make it mandatory to choose a version upon every boot
 1. run `update-grub` to regenerate grub.conf changes
@@ -114,7 +115,7 @@ uname -r 	# displays currently running kernel version
 1. the base module code can be found [here](code/hi)
 1. update the licence information to have your name
 1. update the `hello_init` function to printk to debug ">>> Hello World! <<<"
-1. update the `hello_exit` to printk ">>> Goodbye Cruel World... <<<" (HINT: printk(KERN_DEBUG "my msg"))
+1. update the `hello_exit` to printk ">>> Goodbye Cruel World... <<<" (HINT: `printk(KERN_DEBUG "my msg")`)
 1. build it
 1. verify your module works
 
@@ -135,20 +136,17 @@ uname -r 	# displays currently running kernel version
 1. Add an entry for our module to `/etc/modules` and reboot
 1. Prove its loaded
 
-#### EXERCISE: Build a kernel module - part x
-
-1. build upon the kernel module in part 1
-1. TODO - more interesting exercies
-1. verify your module works
-
 #### EXERCISE: Checkstyle
+Code won't be accepted into the kernel source tree unless it has the correct coding style. There is a hany tool which helps you meet these requirements.
 
 1. find the `checkstyle.pl` script in the kernel source tree (HINT: `checkstyle.pl --file foo.c --no-tree is a good way to check a single file)
-1. run it on your c module file and make updates as suggested
+1. run it on your kernel module file and make updates as suggested
 
 #### EXERCISE: Load a character device driver
-1. build and load `hello_char.c` TODO give dir URL
-1. Prove its been loaded by checking `dmesg`
+1. the base module code can be found [here](code/char_device)
+1. build and load `hello_char.c`
+1. Create the device file as per the `dmesg` output
+1. Prove its been loaded
 1. Check `/proc/devices` and `/proc/modules` for further proof its been loaded
 
 ##### References

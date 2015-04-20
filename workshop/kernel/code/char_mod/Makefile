@@ -1,6 +1,6 @@
 ifneq ($(KERNELRELEASE),)
 # kbuild part of makefile
-obj-m  := hello_char.o
+obj-m  := hello-char.o
 
 else
 # normal makefile

@@ -74,6 +74,18 @@ Now your new kernel is built, let's boot into it! GRUB will automatically choose
 1. `reboot` and now select your newest version of the kernel by selecting 'Advanced options for Debian GNU/Linux' and then the version.
 1. Check for your custom kernel release string with `uname -a`
 
+## /proc filesystem
+
+#### EXERCISE: A tour of /proc
+1. list the contents of `/proc`
+1. Note the series of numbered files on the left. Each of these is a directory representing a process in the system. Because the first process created in GNU/Linux is the init process, it has a `process-id` of `1`. Next, performing an `ls` on this directory shows a list of files. 
+1. Each file provides details on the particular process. For example, to see the command-line entry for init, simply `cat` the `cmdline` file.
+1. There are many useful files in /proc. To use them you just simply `cat` them. Try that out for the following: `cpuinfo`, `meminfo`, `filesystems`, `modules`, `mounts`.
+
+#### EXERCISE: Dynamically update the running kernel with /proc
+1. Run `cat /proc/sys/kernel/hostname` to see what the hostname is currently set too.
+1. Write to the same file and update the hostname to be "Code PaLOUsa" or something else of your choice.
+
 ## Loadable Kernel Modules
 
 **Helpful module Commands**
@@ -108,7 +120,6 @@ uname -r 	# displays currently running kernel version
 1. Prove its unloaded
 1. Find out the names of the other modules that `btrfs` depends on. 
 1. What does  `/lib/modules/`uname -r`/modules.dep` and verify the dependencies listed are the same as in `modinfo`.
-
 
 #### EXERCISE: Build your first kernel module
 

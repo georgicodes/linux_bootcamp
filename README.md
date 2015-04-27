@@ -23,7 +23,7 @@ Complete the Ubuntu installation process.
 	    * Name, Job, How do you currently use Linux?
 	* Linux history - Georgi
 	* Linux distributions - Georgi
-	* Who uses Linux and why? - Jessie
+	* [Who uses Linux and why? - Jessie](https://docs.google.com/a/jessfraz.com/presentation/d/1gtcAGhU-rzm0Q-TmreU-mKaDsRLiCx5J__PBGzluGwA/edit?usp=sharing)
 	* Talks about how our companies use linux - All
 	* Fun Linux easter eggs - Tammy
 
@@ -31,7 +31,7 @@ Complete the Ubuntu installation process.
 	* What is the kernel?
 	* Boot process
 
-### Linux Filesystem - Jessie - 30mins
+### [Linux Filesystem - Jessie - 30mins](https://docs.google.com/a/jessfraz.com/presentation/d/1WZs1ub7DddcIWNykZEZs2b_oFGlEYuMg7KCCMPQG45g/edit?usp=sharing)
 	* Filesystem types
 	* Standard disk filesystems: `ext2, ext3, ext4, XFS, Btrfs, JFS, NTFS`
 	* Partitions
@@ -75,7 +75,7 @@ Complete the Ubuntu installation process.
 	* `sysctl` - Jessie
 
 ## Advanced Topics 
-### Advanced - Jessie - 15mins +
+### [Advanced - Jessie - 15mins +](workshop/advanced)
 	* How to use `strace` for diagnostics and debugging
 	* What is a namespace?
 	* How to use ‘livepatch’

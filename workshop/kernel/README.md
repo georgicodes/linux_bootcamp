@@ -112,17 +112,9 @@ uname -r 	# displays currently running kernel version
 
 1. Find out what file `lsmod` reads from
 
-#### EXERCISE: Loading and unloading modules
-
-1. Install the Linux kernel headers `apt-get install linux-headers-$(uname -r)`. We need this so that we can build our own modules later on.
-1. Load `btrfs` and its dependencies
-1. Unload `btrfs`
-1. Prove its unloaded
-1. Find out the names of the other modules that `btrfs` depends on. 
-1. What does  `/lib/modules/`uname -r`/modules.dep` and verify the dependencies listed are the same as in `modinfo`.
-
 #### EXERCISE: Build your first kernel module
 
+1. Install the Linux kernel headers `apt-get install linux-headers-$(uname -r)`. We need this so that we can build our own modules later on.
 1. the base module code can be found [here](code/hi)
 1. update the licence information to have your name
 1. update the `hello_init` function to printk to debug ">>> Hello World! <<<"

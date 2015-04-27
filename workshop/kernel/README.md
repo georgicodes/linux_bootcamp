@@ -154,7 +154,7 @@ Code won't be accepted into the kernel source tree unless it has the correct cod
 1. run it on your kernel module file and make updates as suggested
 
 #### EXERCISE: Load a character device driver
-1. the base module code can be found [here](code/char_device)
+1. the base module code can be found [here](code/char_mod)
 1. build and load `hello_char.c`
 1. Create the device file as per the `dmesg` output
 1. Prove its been loaded

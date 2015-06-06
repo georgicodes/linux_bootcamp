@@ -1,36 +1,51 @@
-# Kernel   
+# Kernel
 
 ## How to configure and build your own kernel
 
-#### EXERCISE: Fetch kernel source and create a kernel config file
-This first way to create a config file, is to use the `make localmodconfig` build target. It runs `lsmod` to find all the modules loaded on the current running system and initializes the config with those modules. 
+#### 1. EXERCISE: Fetch kernel source and create a kernel config file
 
-1. Fetch the latest kernel source from kernel.org into `/usr/src`
-1. Unpack it
-1. Run `make localmodconfig` This oldconfig process will carry over your previous settings, and prompt you if there are new features not covered by your earlier .config file. You will be asked lots of questions, if you just keep pressing (or holding down) enter, the default answer will be selected.
-1. Confirm that a file called `.config` was created
-1. Note down the value of the following configuration setting `CONFIG_LOCALVERSION_AUTO`. HINT: `cat` the config file and `grep` for this setting.
+##### Download the kernel source
+1. Open up a terminal (side bar blackbox icon).
+1. Switch to superuser `sudo -i`. This command switches your current terminal to be logged in as a superuser.
+1. Install curl as we are going to need it `sudo apt-get install curl`
+1. `cd /usr/src`. Kernel source is always stored in this directory.
+1. Fetch the latest stable kernel source from kernel.org. You can use the curl command to do this: `curl -O https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.5.tar.xz`. (File is about 85mg) OR if the internet is slow then we have already put this file in the home directory so you can just simply copy it across `cp /home/vagrant/handy_workshop_files/linux-4.0.5.tar.xz .`.
+1. Unpack the tarball `tar -xvf linux-4.0.5.tar.xz`. If you list the contents of your directory it should look like this:
+```bash
+root@vagrant-VirtualBox:/usr/src# ls
+linux-4.0.5              linux-headers-3.19.0-15-generic  vboxguest-4.3.28
+linux-4.0.5.tar.xz       linux-headers-3.19.0-18
+linux-headers-3.19.0-15  linux-headers-3.19.0-18-generic
+```
 
-#### EXERCISE: Customize the kernel config
-We are now going to update this .config file with some custom settings. For this config file we want to set the `CONFIG_LOCALVERSION_AUTO=y` and to turn on support for thunderbolt.
+##### Customizing the kernel
+We are now going to customize our kernel by toggling on two options as explained below.
 
-The second method of creating a config file is to uses the menu UI. It will read from the `.config` file already created in the previous step and allow you to further customize.
+* Firstly install `sudo apt-get install libncurses5-dev` as this is needed for the GUI to work.
+* Run `make menuconfig`
+* Select `General Setup` from the list and turn on 'Automatically append version information...'.
+![](../../images/menu_config.png)
+* Select `Device Drivers` from the main menu. Scroll right down to the bottom and select `Thunderbolt support for Apple Devices`. Now we will turn this on as a `built-in` kernel option not a `module` option. To do this, hit space bar until an `M` appears. Please do this even if you are not on a Mac - this is merely a learning exercise :)
+* Spend some time poking around and looking at all the different options. Its dizzying how many there are, setting each on individually would take you all day!
+* Save and exit.
+* Confirm that a file called `.config` was created
+* Take a look at the contents of the file by using the `cat` command. By setting 'Automatically append version information...' in the GUI we have set `CONFIG_LOCALVERSION_AUTO=y`. (Setting to be explained in next exercise)
+```bash
+root@vagrant-VirtualBox:/usr/src/linux-4.0.5# cat .config | grep CONFIG_LOCALVERSION_AUTO
+CONFIG_LOCALVERSION_AUTO=y
+```
 
-1. Firstly install `libncurses5-dev` as this is needed for the GUI to work.
-1. Run `make menuconfig`
-1. Turn on 'Automatically append version information...' under the `General Setup` menu.
-1. Search for and select Thuderbolt support under `Device Drivers` menu. Ensure to turn this on as a `built-in` kernel option not a `module` option.
-1. Spend some time poking around and looking at all the different options. Its dizzying how many there are, setting each on individually would take you all day!
-1. Save and exit
-1. Note down the value of the following configuration setting `CONFIG_LOCALVERSION_AUTO`. Make sure its set to `CONFIG_LOCALVERSION_AUTO=y`. (Setting to be explained in next exercise)
-
-#### EXERCISE: Customizing your kernel release string
+#### 2. EXERCISE: Customizing your kernel release string
 It's always fun to personalize things. The `CONFIG_LOCALVERSION_AUTO=y` config option we set previously allows us to append a version name to our kernel version string.
 
-1. Update the `EXTRAVERSION` field in the `Makefile` found in the root of the kernel source tree. Adding your name here or something silly like `-rainbow-unicorns-rule`. This will be appended to your kernel version name string. Note, start this with a dash `-`.
-1. Now find out what the final kernel release string will be by running `make kernelrelease`.
+* Update the `EXTRAVERSION` field in the `Makefile` found in the root of the kernel source tree. Adding your name here or something silly like `-rainbow-unicorns-rule`. This will be appended to your kernel version name string. Note, start this with a dash `-`.
+```bash
+root@vagrant-VirtualBox:/usr/src/linux-4.0.5# vi Makefile
+```
+* Now find out what the final kernel release string will be by running `make kernelrelease`.
 
 #### EXERCISE: Configuring for another architecture
+TODO - remove me??
 Let's take a brief look at how you would configure your kernel for building on another architecture.
 
 1. `ls arch` lists out all the supported architectures.
@@ -38,8 +53,10 @@ Let's take a brief look at how you would configure your kernel for building on a
 NOTE: you can't actually build a kernel for any other architecture until you install the appropriate cross-compiler toolchain.
 1. Exit and Save but rename the file to be `.config-blackfin`
 
-#### EXERCISE: Buliding your kernel - TO DO AT HOME!!
-There are multiple ways that you can build and install your own kernel, here I have presented one way. This will install the new (compressed) kernel image into the `/boot` directory so that GRUB can find it at boot time
+#### 2B. EXERCISE: Building your kernel - TO DO AT HOME!!
+There are multiple ways that you can build and install your own kernel, here I have presented one way. This will install the new (compressed) kernel image into the `/boot` directory so that GRUB can find it at boot time.
+
+We will not do this in this workshop as building a kernel can take hours depending on how much grunt your laptop has!
 
 1. Run the following commands and wait for victory!
 ```bash
@@ -48,8 +65,8 @@ make modules_install: # Installs all of the newly-built modules. They will now s
 make install 	#  Install the new (compressed) kernel image into the `/boot` directory so that GRUB can find it at boot time. And it also create a new initrd initial ram disk that goes along with that kernel to support the early part of the boot process
 ```
 
-#### EXERCISE: Install a pre-built kernel
-As it will take too long build a kernel in this workshop as asked in exercie "Buliding your kernel" we are going to instead install kernel version 4.0 from the ubuntu kernel mainline repo: [http://kernel.ubuntu.com/~kernel-ppa/mainline/](http://kernel.ubuntu.com/~kernel-ppa/mainline/).
+#### 4. EXERCISE: Install a pre-built kernel
+As it will take too long build a kernel in this workshop, we are going to instead install kernel version 4.0 from the ubuntu kernel mainline repo: [http://kernel.ubuntu.com/~kernel-ppa/mainline/](http://kernel.ubuntu.com/~kernel-ppa/mainline/).
 
 ```bash
 cd /usr/src
@@ -66,9 +83,9 @@ sudo dpkg -i linux-headers-4.0*.deb linux-image-4.0*.deb
 1. Take a look that `/lib/modules/$KERNEL_VERSION` has your new modules.
 
 #### EXERCISE: Boot into your new kernel
-Now your new kernel is built, let's boot into it! GRUB will automatically choose the latest kernel version to boot into. 
+Now your new kernel is built, let's boot into it! GRUB will automatically choose the latest kernel version to boot into.
 
-1. `vim /etc/default/grub` 
+1. `vim /etc/default/grub`
 1. update the `GRUB_TIMEOUT` value to be 10 seconds or -1 to make it mandatory to choose a version upon every boot
 1. run `update-grub` to regenerate grub.conf changes
 1. `reboot` and now select your newest version of the kernel by selecting 'Advanced options for Debian GNU/Linux' and then the version.
@@ -78,7 +95,7 @@ Now your new kernel is built, let's boot into it! GRUB will automatically choose
 
 #### EXERCISE: A tour of /proc
 1. list the contents of `/proc`
-1. Note the series of numbered files on the left. Each of these is a directory representing a process in the system. Because the first process created in GNU/Linux is the init process, it has a `process-id` of `1`. Next, performing an `ls` on this directory shows a list of files. 
+1. Note the series of numbered files on the left. Each of these is a directory representing a process in the system. Because the first process created in GNU/Linux is the init process, it has a `process-id` of `1`. Next, performing an `ls` on this directory shows a list of files.
 1. Each file provides details on the particular process. For example, to see the command-line entry for init, simply `cat` the `cmdline` file.
 1. There are many useful files in /proc. To use them you just simply `cat` them. Try that out for the following: `cpuinfo`, `meminfo`, `filesystems`, `modules`, `mounts`.
 

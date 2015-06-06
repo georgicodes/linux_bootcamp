@@ -28,7 +28,7 @@ Download and unzip the Ubuntu_15.04 image that we have already pre-built from [h
 You should see a file called package.box.
 
 #### Install the Ubuntu box in Vagrant
-Open up a terminal and run the below command. This installs an Ubuntu box called `Ubuntu-Desktop-15.04` with Vagrant.
+Open up a terminal and change into the directory to where you unzipped the image.
 
 ```bash
 $ vagrant box add {boxname} package.box
@@ -37,10 +37,9 @@ in our case:
 ```
 $ vagrant box add Ubuntu-Desktop-15.04 package.box
 ```
+This installed an Ubuntu box called `Ubuntu-Desktop-15.04` with Vagrant.
 
 #### Init the Vagrant box
-Go to a different folder and type:
-
 ```
 $ vagrant init {boxname}
 ```
@@ -51,7 +50,7 @@ $ vagrant init Ubuntu-Desktop-15.04
 If you list the contents of this directory (`ls`), you'll now see a new file that was created `Vagrantfile`.
 
 #### Enable GUI
-We now need to enable the GUI, to do this either replace the `Vagrantfile` created with the one here: XXX TODO or edit the generated `Vagrantfile` by uncommenting the following lines and saving the file:
+We now need to enable the GUI, to do this either replace the `Vagrantfile` created with the one [here](https://raw.githubusercontent.com/GeorgiCodes/linux_bootcamp/master/downloads/vagrant_ubuntu_image/Vagrantfile), or edit the generated `Vagrantfile` by uncommenting the following lines and saving the file:
 
 ```bash
     config.vm.provider "virtualbox" do |v|
@@ -60,13 +59,19 @@ We now need to enable the GUI, to do this either replace the `Vagrantfile` creat
 ```
 
 #### Spin it up!
+Now we've done all the necessary initialization steps to setup Ubuntu with Vagrant, from now on we only need to start it up and shut it down.
+
+The username and password for this Ubuntu image are both `vagrant`.
+
 ```bash
 $ vagrant up
 ```
 You should now see this:
 ![](images/Vagrant_Ubuntu_Box.png)
 
-This should launch a Ubuntu 15.04 Desktop for use throughout the tutorial! When you want to shut it down run:
+This should launch a Ubuntu 15.04 Desktop for use throughout the tutorial!
+
+When you want to shut it down run:
 ```bash
 $ vagrant halt
 ```

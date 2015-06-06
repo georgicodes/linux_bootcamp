@@ -11,6 +11,15 @@
     * Talks about how our companies use linux - All
     * Fun Linux easter eggs - Tammy
 
+### Command Line - Tammy - 15mins
+    * types of shells
+    * getting help - man pages
+    * basic commands `pwd, cd, cd .., ls`
+    * searching for files
+    * working with files `cat, less, tail, head`
+    * Package Management System
+        * Installing software
+
 ### Boot Process + Kernel Intro - Georgi - 15mins
     * What is the kernel?
     * Boot process
@@ -22,25 +31,16 @@
     * Filesystem Hierarchy Standard (FHS)
     * Disk + filesystem usage
         * differences between Linux and Windows
-        * case sensistive
+        * case sensitive
         * relative v absolute paths
     * Overlay file systems
-    * Exercises and examples and pictres
+    * Exercises and examples and pictures
     * `fsck`
-
-### Command Line - Tammy - 15mins
-    * types of shells
-    * getting help - man pages
-    * basic commands `pwd, cd, cd .., ls`
-    * searching for files
-    * working with files `cat, less, tail, head`
-    * Package Management System
-        * Installing software
 
 ### Processes - Tammy - 15min
     * what is a process
     * types of processes
-    * how the shell creates processes 
+    * how the shell creates processes
     * running processes in background and foreground
     * execution modes
     * daemons
@@ -58,7 +58,7 @@
     * Character device drivers
     * `sysctl` - Jessie
 
-## Advanced Topics 
+## Advanced Topics
 ### Advanced - Jessie - 15mins +
     * How to use `strace` for diagnostics and debugging
     * What is a namespace?
@@ -68,4 +68,4 @@
 ## Summary
 ### Summary - All - 5 mins
     * Finale exercise!
-    * Where can I learn more? 
+    * Where can I learn more?

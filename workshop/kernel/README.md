@@ -12,7 +12,7 @@
 1. Fetch the latest stable kernel source from kernel.org. You can use the curl command to do this: `curl -O https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.5.tar.xz`. (File is about 85mg) OR if the internet is slow then we have already put this file in the home directory so you can just simply copy it across `cp /home/vagrant/handy_workshop_files/linux-4.0.5.tar.xz .`.
 1. Unpack the tarball `tar -xvf linux-4.0.5.tar.xz`. If you list the contents of your directory it should look like this:
 ```bash
-root@vagrant-VirtualBox:/usr/src# ls
+$ ls
 linux-4.0.5              linux-headers-3.19.0-15-generic  vboxguest-4.3.28
 linux-4.0.5.tar.xz       linux-headers-3.19.0-18
 linux-headers-3.19.0-15  linux-headers-3.19.0-18-generic
@@ -31,7 +31,7 @@ We are now going to customize our kernel by toggling on two options as explained
 * Confirm that a file called `.config` was created
 * Take a look at the contents of the file by using the `cat` command. By setting 'Automatically append version information...' in the GUI we have set `CONFIG_LOCALVERSION_AUTO=y`. (Setting to be explained in next exercise)
 ```bash
-root@vagrant-VirtualBox:/usr/src/linux-4.0.5# cat .config | grep CONFIG_LOCALVERSION_AUTO
+$ cat .config | grep CONFIG_LOCALVERSION_AUTO
 CONFIG_LOCALVERSION_AUTO=y
 ```
 
@@ -40,18 +40,14 @@ It's always fun to personalize things. The `CONFIG_LOCALVERSION_AUTO=y` config o
 
 * Update the `EXTRAVERSION` field in the `Makefile` found in the root of the kernel source tree. Adding your name here or something silly like `-rainbow-unicorns-rule`. This will be appended to your kernel version name string. Note, start this with a dash `-`.
 ```bash
-root@vagrant-VirtualBox:/usr/src/linux-4.0.5# vi Makefile
+$ vi Makefile
 ```
-* Now find out what the final kernel release string will be by running `make kernelrelease`.
-
-#### EXERCISE: Configuring for another architecture
-TODO - remove me??
-Let's take a brief look at how you would configure your kernel for building on another architecture.
-
-1. `ls arch` lists out all the supported architectures.
-1. `make ARCH=blackfin menuconfig`
-NOTE: you can't actually build a kernel for any other architecture until you install the appropriate cross-compiler toolchain.
-1. Exit and Save but rename the file to be `.config-blackfin`
+Whilst you are looking in the `Makefile`, take a look at the `NAME` field, what does it say? Kinda silly right - this is the name the Linux community voted on for this version of the Linux kernel :)
+* Now find out what the final kernel release string will be:
+```bash
+$ make kernelrelease
+4.0.5-rainbow-unicorns-rule
+```
 
 #### 2B. EXERCISE: Building your kernel - TO DO AT HOME!!
 There are multiple ways that you can build and install your own kernel, here I have presented one way. This will install the new (compressed) kernel image into the `/boot` directory so that GRUB can find it at boot time.
@@ -60,48 +56,86 @@ We will not do this in this workshop as building a kernel can take hours dependi
 
 1. Run the following commands and wait for victory!
 ```bash
+TODO update with make dep stpes instead
 make 	# builds a kernel ready to be installed
 make modules_install: # Installs all of the newly-built modules. They will now show up under a directory in `/lib/modules`
 make install 	#  Install the new (compressed) kernel image into the `/boot` directory so that GRUB can find it at boot time. And it also create a new initrd initial ram disk that goes along with that kernel to support the early part of the boot process
 ```
 
 #### 4. EXERCISE: Install a pre-built kernel
-As it will take too long build a kernel in this workshop, we are going to instead install kernel version 4.0 from the ubuntu kernel mainline repo: [http://kernel.ubuntu.com/~kernel-ppa/mainline/](http://kernel.ubuntu.com/~kernel-ppa/mainline/).
+As it will take too long build a kernel in this workshop, we've done this step for you, so for this exercise we will install it.
 
+##### Install the kernel
 ```bash
-cd /usr/src
-# get the pre-built kernel package
-curl -O http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.0-vivid/linux-image-4.0.0-040000-generic_4.0.0-040000.201504121935_amd64.deb
-curl -O http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.0-vivid/linux-headers-4.0.0-040000-generic_4.0.0-040000.201504121935_amd64.deb
-curl -O http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.0-vivid/linux-headers-4.0.0-040000_4.0.0-040000.201504121935_all.deb
+# there are 3 files required to install a mainline kernel version, we've downloaded them already here
+$ cd /home/vagrant/handy_workshop_files/mainline_kernel_4.0.5_debs/
 # install the new kernel
-sudo dpkg -i linux-headers-4.0*.deb linux-image-4.0*.deb
+$ sudo dpkg -i *.deb
 ```
 
-#### EXERCISE: Confirm your build and install worked
-1. Take a look at `/boot` and confirm that there is a new vmlinuz, initrd image file and config file corresponding to your build verison.
-1. Take a look that `/lib/modules/$KERNEL_VERSION` has your new modules.
+##### Confirm it worked
+* Take a look at `/boot` and confirm that there is a new vmlinuz, initrd image file and config file corresponding to your build version.
+```bash
+$ ls /boot
+abi-3.19.0-18-generic            memtest86+.bin
+abi-4.0.5-040005-generic         memtest86+.elf
+config-3.19.0-18-generic         memtest86+_multiboot.bin
+config-4.0.5-040005-generic      System.map-3.19.0-18-generic
+grub                             System.map-4.0.5-040005-generic
+initrd.img-3.19.0-18-generic     vmlinuz-3.19.0-18-generic
+initrd.img-4.0.5-040005-generic  vmlinuz-4.0.5-040005-generic
+```
+* Check also that the `/lib/modules/$KERNEL_VERSION` directory has your new modules.
+```bash
+$ ls /lib/modules/$KERNEL_VERSION
+3.19.0-15-generic  3.19.0-18-generic  4.0.5-040005-generic
+```
 
-#### EXERCISE: Boot into your new kernel
-Now your new kernel is built, let's boot into it! GRUB will automatically choose the latest kernel version to boot into.
+#### 5. EXERCISE: Boot into your new kernel
+Now your new kernel is built, let's boot into it! Your boot manager GRUB2 will automatically choose the latest kernel version to boot into.
 
-1. `vim /etc/default/grub`
-1. update the `GRUB_TIMEOUT` value to be 10 seconds or -1 to make it mandatory to choose a version upon every boot
-1. run `update-grub` to regenerate grub.conf changes
-1. `reboot` and now select your newest version of the kernel by selecting 'Advanced options for Debian GNU/Linux' and then the version.
-1. Check for your custom kernel release string with `uname -a`
+* Type `reboot` from the terminal
+* When your system starts up hold down the shift key until a black screen with the GRUB menu appears. Select `Advanced Options for Debian GNU/Linux`
+* You will be presented with a list of kernel versions. The latest kernel version (the one you just installed) should be already selected, if its not then select it.
+* Once booted check for your custom kernel release string with `uname -r`.
+```bash
+$ uname -r
+4.0.5-040005-generic
+```
 
 ## /proc filesystem
 
-#### EXERCISE: A tour of /proc
-1. list the contents of `/proc`
-1. Note the series of numbered files on the left. Each of these is a directory representing a process in the system. Because the first process created in GNU/Linux is the init process, it has a `process-id` of `1`. Next, performing an `ls` on this directory shows a list of files.
-1. Each file provides details on the particular process. For example, to see the command-line entry for init, simply `cat` the `cmdline` file.
-1. There are many useful files in /proc. To use them you just simply `cat` them. Try that out for the following: `cpuinfo`, `meminfo`, `filesystems`, `modules`, `mounts`.
+#### 6. EXERCISE: A tour of /proc
+* list the contents of the proc directory `ls /proc`
+* Note the series of numbered files on the left. Each of these is a directory representing a process in the system. Because the first process created in GNU/Linux is the init process, it has a `process-id` of `1`. Next, performing an `ls` on this directory shows a list of files associated with that process.
+```bash
+$ ls /proc/1
+attr             cpuset   limits      net            projid_map  stat
+autogroup        cwd      loginuid    ns             root        statm
+auxv             environ  map_files   numa_maps      sched       status
+cgroup           exe      maps        oom_adj        schedstat   syscall
+clear_refs       fd       mem         oom_score      sessionid   task
+cmdline          fdinfo   mountinfo   oom_score_adj  setgroups   timers
+comm             gid_map  mounts      pagemap        smaps       uid_map
+coredump_filter  io       mountstats  personality    stack       wchan
+```
+* Each file provides details on the particular process. For example, to see the command-line entry for init, simply `cat` the `cmdline` file.
+```bash
+$ cat cmdline
+BOOT_IMAGE=/boot/vmlinuz-4.0.5-040005-generic root=UUID=d5a30029-c305-4499-b6a8-81bf8edd3f96 ro quiet splash
+```
+* There are many useful files in /proc. To use them you just simply `cat` them. Try that out for the following: `cpuinfo`, `meminfo`, `filesystems`, `modules`, `mounts`.
 
-#### EXERCISE: Dynamically update the running kernel with /proc
-1. Run `cat /proc/sys/kernel/hostname` to see what the hostname is currently set too.
-1. Write to the same file and update the hostname to be "Code PaLOUsa" or something else of your choice.
+#### 7. EXERCISE: Dynamically update the running kernel with /proc
+* Run `cat /proc/sys/kernel/hostname` to see what the hostname is currently set too.
+* Write to the same file and update the hostname to be "Linux-or-death" or something else of your choice.
+```bash
+$ cat /proc/sys/kernel/hostname
+vagrant-VirtualBox
+$ echo "linux-or-death" > /proc/sys/kernel/hostname
+$ cat /proc/sys/kernel/hostname
+linux-or-death
+```
 
 ## Loadable Kernel Modules
 
@@ -174,3 +208,12 @@ Code won't be accepted into the kernel source tree unless it has the correct cod
 * [http://www.cyberciti.biz/tips/compiling-linux-kernel-module.html](http://www.cyberciti.biz/tips/compiling-linux-kernel-module.html)
 * [http://www.linuxvoice.com/be-a-kernel-hacker/](http://www.linuxvoice.com/be-a-kernel-hacker/)
 * [http://kernelnewbies.org/FirstKernelPatch](http://kernelnewbies.org/FirstKernelPatch)
+
+
+Base Image TODO
+install vim
+set it as default?
+remove older kernel
+vim /etc/default/grub
+set auto_timeout=false etc then update-grub
+make it 1-2 more gig

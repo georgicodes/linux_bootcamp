@@ -15,8 +15,12 @@ For this workshop, we will use a program called Vagrant to run a full copy of Ub
 
 ## Prerequsites
 1. Free up around 10GB's on your laptop to get started.
-1. **Download and install** VirtualBox 4.3.26 for your OS: https://www.virtualbox.org/wiki/Downloads
-1. **Download and install** Vagrant for your OS: http://www.vagrantup.com/downloads.html
+1. **Download and install** VirtualBox 4.3.26 for your OS:
+http://download.virtualbox.org/virtualbox/4.3.28/VirtualBox-4.3.28-100309-OSX.dmg (mac)
+http://download.virtualbox.org/virtualbox/4.3.28/VirtualBox-4.3.28-100309-Win.exe (Windows)
+1. **Download and install** Vagrant for your OS: https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.dmg (mac)
+https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.msi (Windows)
+1. **Download** the Ubuntu_15.04 vagrant image that we have already pre-built from https://www.dropbox.com/s/b1zqdjyka9udkfv/package.box.zip?dl=0 (this is about 1.6Gb so may take a while)
 
 ## Setting up Ubuntu with Vagrant
 
@@ -24,7 +28,7 @@ For this workshop, we will use a program called Vagrant to run a full copy of Ub
 Check that you have Vagrant installed successfully by running `vagrant --version`. You should see something like `Vagrant 1.7.2`.
 
 #### Download the Ubuntu vagrant image
-Download and unzip the Ubuntu_15.04 image that we have already pre-built from [here](https://www.dropbox.com/s/b1zqdjyka9udkfv/package.box.zip?dl=0).
+Unzip the Ubuntu_15.04 image that you previously downloaded.
 You should see a file called package.box.
 
 #### Install the Ubuntu box in Vagrant

@@ -10,17 +10,20 @@
 1. Install curl as we are going to need it `sudo apt-get install curl`
 1. `cd /usr/src`. Kernel source is always stored in this directory.
 1. Fetch the latest stable kernel source from kernel.org. You can use the curl command to do this: `curl -O https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.5.tar.xz`. (File is about 85mg) OR if the internet is slow then we have already put this file in the home directory so you can just simply copy it across `cp /home/vagrant/handy_workshop_files/linux-4.0.5.tar.xz .`.
-1. Unpack the tarball `tar -xvf linux-4.0.5.tar.xz`. If you list the contents of your directory it should look like this:
 ```bash
+# Unpack the tarball
+$ tar -xvf linux-4.0.5.tar.xz
+# list contents
 $ ls
-linux-4.0.5              linux-headers-3.19.0-15-generic  vboxguest-4.3.28
+linux-4.0.5               vboxguest-4.3.28
 linux-4.0.5.tar.xz       linux-headers-3.19.0-18
-linux-headers-3.19.0-15  linux-headers-3.19.0-18-generic
+linux-headers-3.19.0-18-generic
 ```
 
 ##### Customizing the kernel
 We are now going to customize our kernel by toggling on two options as explained below.
 
+* Change into kernel folder `cd linux-4.0.5`
 * Firstly install `sudo apt-get install libncurses5-dev` as this is needed for the GUI to work.
 * Run `make menuconfig`
 * Select `General Setup` from the list and turn on 'Automatically append version information...'.
@@ -56,7 +59,6 @@ We will not do this in this workshop as building a kernel can take hours dependi
 
 1. Run the following commands and wait for victory!
 ```bash
-TODO update with make dep stpes instead
 make 	# builds a kernel ready to be installed
 make modules_install: # Installs all of the newly-built modules. They will now show up under a directory in `/lib/modules`
 make install 	#  Install the new (compressed) kernel image into the `/boot` directory so that GRUB can find it at boot time. And it also create a new initrd initial ram disk that goes along with that kernel to support the early part of the boot process
@@ -106,10 +108,37 @@ $ uname -r
 ## /proc filesystem
 
 #### 6. EXERCISE: A tour of /proc
-* list the contents of the proc directory `ls /proc`
-* Note the series of numbered files on the left. Each of these is a directory representing a process in the system. Because the first process created in GNU/Linux is the init process, it has a `process-id` of `1`. Next, performing an `ls` on this directory shows a list of files associated with that process.
+* list the contents of the proc directory
 ```bash
-$ ls /proc/1
+$ cd /proc
+$ ls
+1     1126  1248  1436  22   48   594  917          filesystems  pagetypeinfo
+10    1127  1250  1439  226  489  596  986          fs           partitions
+1003  1129  1257  1444  23   49   597  987          interrupts   sched_debug
+1005  1132  126   1451  231  5    6    990          iomem        schedstat
+1010  1137  127   1453  24   50   606  991          ioports      scsi
+1012  1140  128   1492  247  51   607  995          irq          self
+1025  1147  1283  15    25   536  636  997          kallsyms     slabinfo
+1030  1156  1295  1501  26   539  645  acpi         kcore        softirqs
+1031  1161  1297  1530  27   545  660  asound       keys         stat
+1038  1177  13    1539  28   547  665  buddyinfo    key-users    swaps
+1050  1195  1321  1540  29   548  685  bus          kmsg         sys
+1065  12    1339  1550  3    549  688  cgroups      kpagecount   sysrq-trigger
+1073  1217  1345  16    30   55   7    cmdline      kpageflags   sysvipc
+1083  122   1357  17    31   551  75   consoles     loadavg      thread-self
+1089  1228  1359  178   314  559  76   cpuinfo      locks        timer_list
+11    123   1365  18    350  56   77   crypto       mdstat       timer_stats
+1103  1230  137   181   4    567  794  devices      meminfo      tty
+1104  1232  1374  183   43   570  8    diskstats    misc         uptime
+1105  1236  138   19    44   575  9    dma          modules      version
+1110  1237  14    2     45   581  910  driver       mounts       vmallocinfo
+1112  124   1424  20    46   585  914  execdomains  mtrr         vmstat
+1118  1240  1426  21    47   589  915  fb           net          zoneinfo
+```
+Each of the numbered directories represents a process in the system. Because the first process created in GNU/Linux is the init process, it has a `process-id` of `1`.
+* Perform an `ls` on the `1` directory to show a list of files associated with that process.
+```bash
+$ ls 1
 attr             cpuset   limits      net            projid_map  stat
 autogroup        cwd      loginuid    ns             root        statm
 auxv             environ  map_files   numa_maps      sched       status
@@ -119,10 +148,35 @@ cmdline          fdinfo   mountinfo   oom_score_adj  setgroups   timers
 comm             gid_map  mounts      pagemap        smaps       uid_map
 coredump_filter  io       mountstats  personality    stack       wchan
 ```
-* Each file provides details on the particular process. For example, to see the command-line entry for init, simply `cat` the `cmdline` file.
+* Some files in proc provide useful information on the currently running kernel. For example, to see info on our CPU, simply `cat` the `cpuinfo` file.
 ```bash
-$ cat cmdline
-BOOT_IMAGE=/boot/vmlinuz-4.0.5-040005-generic root=UUID=d5a30029-c305-4499-b6a8-81bf8edd3f96 ro quiet splash
+$ cat cpuinfo
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 69
+model name	: Intel(R) Core(TM) i7-4650U CPU @ 1.70GHz
+stepping	: 1
+microcode	: 0x19
+cpu MHz		: 2304.932
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 1
+core id		: 0
+cpu cores	: 1
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx rdtscp lm constant_tsc rep_good nopl pni monitor ssse3 lahf_lm
+bugs		:
+bogomips	: 4609.86
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
 ```
 * There are many useful files in /proc. To use them you just simply `cat` them. Try that out for the following: `cpuinfo`, `meminfo`, `filesystems`, `modules`, `mounts`.
 
@@ -159,61 +213,126 @@ uname -r 	# displays currently running kernel version
 /lib/modules/`uname -r`/	# where module files are stored
 ```
 
-#### EXERCISE: Learn about `lsmod`
+#### 8. EXERCISE: Learn about `lsmod`
 
-1. Find out what file `lsmod` reads from
+* Find out what file `lsmod` reads from. To do this let's refer to the handy `man` pages.
+```bash
+$ man lsmod
+```
+Read the description, what does it say?
 
-#### EXERCISE: Build your first kernel module
+#### 9. EXERCISE: Build your first kernel module
 
-1. Install the Linux kernel headers `apt-get install linux-headers-$(uname -r)`. We need this so that we can build our own modules later on.
-1. the base module code can be found [here](code/hi)
-1. update the licence information to have your name
-1. update the `hello_init` function to printk to debug ">>> Hello World! <<<"
-1. update the `hello_exit` to printk ">>> Goodbye Cruel World... <<<" (HINT: `printk(KERN_DEBUG "my msg")`)
-1. build it
-1. verify your module works
+##### Get setup with our code templates
+* Check out the github repository
+```bash
+# ensure you are in sudo mode
+$ sudo -i
+# install git package
+$ apt-get install git
+# checkout the repository
+$ git clone https://github.com/GeorgiCodes/linux_bootcamp
+$ cd linux_bootcamp/workshop/kernel/code/hi
+# you'll see two files, the C code and the Makefile
+$ ls -la
+total 16
+drwxr-xr-x 2 root root 4096 Jun 13 09:18 .
+drwxr-xr-x 4 root root 4096 Jun 13 09:18 ..
+-rw-r--r-- 1 root root  560 Jun 13 09:18 hi.c
+-rw-r--r-- 1 root root  273 Jun 13 09:18 Makefile
+```
+* Let's install `vim` which is an improved version of the popular `vi` text editor `apt-get install vim`. Vim provides nice syntax colors.
 
-#### EXERCISE: Returning negative number
+##### Let's Code!
+* open up the c code file `vim hi.c`
+* update the license information to have your name.
+```bash
+MODULE_AUTHOR("YOUR NAME");
+MODULE_DESCRIPTION("A Simple Hello World module");
+```
+* Next, update the `hello_init` function to print a debug message. Replace the TODO line with the following `printk(KERN_DEBUG ">>> Hello World! <<<");`
+* replace the TODO line in the `hello_exit` function to `printk(KERN_DEBUG "">>> Goodbye Cruel World... <<<");`
 
-1. modify your `hello_init` function to return -7
-1. build and load it
-1. what happens? check `dmesg` as you are trying this
+##### Build and load your first module
+```bash
+# build it with the make command
+$ make
+make -C /lib/modules/`uname -r`/build M=$PWD
+make[1]: Entering directory '/usr/src/linux-headers-4.0.5-040005-generic'
+  CC [M]  /root/linux_bootcamp/workshop/kernel/code/hi/hi.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /root/linux_bootcamp/workshop/kernel/code/hi/hi.mod.o
+  LD [M]  /root/linux_bootcamp/workshop/kernel/code/hi/hi.ko
+make[1]: Leaving directory '/usr/src/linux-headers-4.0.5-040005-generic'
+# you'll now see a whole bunch more files includes the kernel object file
+$ ls
+built-in.o  hi.ko     hi.mod.o  Makefile       Module.symvers
+hi.c        hi.mod.c  hi.o      modules.order
+# insert your built module (kernel object file)
+$ insmod hi.ko
+# check the kernel logs to prove it was loaded
+$ dmesg
+[   11.666472] VBoxGuestCommonIOCtl: HGCM_CALL: 64 Failed. rc=-2.
+[  155.115164] ohci-pci 0000:00:06.0: frame counter not updating; disabled
+[  155.115189] ohci-pci 0000:00:06.0: HC died; cleaning up
+[  155.115514] usb 1-1: USB disconnect, device number 2
+[ 2125.390177] my msg
+[ 2263.078372] >>> Hello World! <<<
+# unload it too
+$ rmmod hi.ko
+# take another peek at the kernel logs again, what do you see?
+$ dmesg
+```
 
-#### EXERCISE: Returning positive number
+#### 10. EXERCISE: Load an LKM on boot
+Let's our our hi kernel module to load automatically on boot. Remember kernel modules are unloaded on reboot unless we do this.
 
-1. modify your init method to return 7
-1. build and load it
-1. what happens? check `dmesg` as you are trying this
+```bash
+# First we need to copy the build module file to the /lib/modules directory
+$ cd linux_bootcamp/workshop/kernel/code/hi
+$ cp hi.ko /lib/modules/`uname -r`
+# Run the depmod command which let's the kernel know about new modules
+$ depmod -a
+# Modules can be loaded on boot. Just update the /etc/modules file by adding in the name of the hi module
+$ echo hi >> /etc/modules
+# now reboot
+$ reboot
+# once rebooted, check that it worked
+$ lsmod | grep hi
+hid_generic            16384  0
+usbhid                 53248  0
+hid                   114688  2 hid_generic,usbhid
+mac_hid                16384  0
+hi                     16384  0
+```
 
-#### EXERCISE: Load an LKM on boot
+#### 11. EXERCISE: Load a character device driver
 
-1. Add an entry for our module to `/etc/modules` and reboot
-1. Prove its loaded
-
-#### EXERCISE: Checkstyle
-Code won't be accepted into the kernel source tree unless it has the correct coding style. There is a hany tool which helps you meet these requirements.
-
-1. find the `checkstyle.pl` script in the kernel source tree (HINT: `checkstyle.pl --file foo.c --no-tree is a good way to check a single file)
-1. run it on your kernel module file and make updates as suggested
-
-#### EXERCISE: Load a character device driver
-1. the base module code can be found [here](code/char_mod)
-1. build and load `hello_char.c`
-1. Create the device file as per the `dmesg` output
-1. Prove its been loaded
-1. Check `/proc/devices` and `/proc/modules` for further proof its been loaded
+```bash
+# change into the right directory
+$ cd linux_bootcamp/workshop/kernel/code/char_mod
+# build and load `hello_char.c`
+$ make
+$ insmod hello-char.ko
+# take a look at the kernel log statement
+$ dmesg
+[   10.728353] VbglR0HGCMInternalCall: vbglR0HGCMInternalDoCall failed. rc=-2
+[   10.728377] VBoxGuestCommonIOCtl: HGCM_CALL: 64 Failed. rc=-2.
+[  372.478668] >>> I was assigned major number 249. <<<
+[  372.478673] >>> Run 'mknod /dev/hello-char c 249 0'. <<<
+# Create the device file as per the `dmesg` output
+$ mknod /dev/hello-char c 249 0
+# Now, let's prove its been loaded
+$ cat /dev/hello-char
+Hello OSCon!
+# Let's also check out some files in /proc too. You should be able to find hello-char
+$ cat /proc/devices
+$ cat /proc/modules
+```
 
 ##### References
 * [http://www.tldp.org/HOWTO/Module-HOWTO/index.html](http://www.tldp.org/HOWTO/Module-HOWTO/index.html)
 * [http://www.cyberciti.biz/tips/compiling-linux-kernel-module.html](http://www.cyberciti.biz/tips/compiling-linux-kernel-module.html)
 * [http://www.linuxvoice.com/be-a-kernel-hacker/](http://www.linuxvoice.com/be-a-kernel-hacker/)
 * [http://kernelnewbies.org/FirstKernelPatch](http://kernelnewbies.org/FirstKernelPatch)
-
-
-Base Image TODO
-install vim
-set it as default?
-remove older kernel
-vim /etc/default/grub
-set auto_timeout=false etc then update-grub
-make it 1-2 more gig

@@ -15,7 +15,7 @@ static ssize_t read_dev(struct file *, char *, size_t, loff_t *);
 static ssize_t write_dev(struct file *, const char *, size_t, loff_t *);
 
 static int major;
-static const char *msg = "Hello CodepLOUsa!\n";
+static const char *msg = "Hello OSCon!\n";
 static unsigned long use_count = 0;
 
 static struct file_operations fops = {
@@ -45,7 +45,7 @@ void cleanup_module(void)
 	unregister_chrdev(major, DEVICE_NAME);
 }
 
-/* 
+/*
  * Called when a process tries to open the device file, like
  * "cat /dev/mycharfile"
  */
@@ -57,7 +57,7 @@ static int open_dev(struct inode *inode, struct file *file)
 	return 0;
 }
 
-/* 
+/*
  * Called when a process closes the device file.
  */
 static int close_dev(struct inode *inode, struct file *file)
@@ -68,7 +68,7 @@ static int close_dev(struct inode *inode, struct file *file)
 	return 0;
 }
 
-/* 
+/*
  * Called when a process, which already opened the dev file, attempts to
  * read from it.
  */
@@ -108,8 +108,8 @@ static ssize_t read_dev(struct file *filp,
 }
 
 
-/*  
- * Called when a process writes to dev file: echo "hi" > /dev/hello 
+/*
+ * Called when a process writes to dev file: echo "hi" > /dev/hello
  */
 static ssize_t
 write_dev(struct file *filp, const char *buff, size_t len, loff_t * off)

@@ -20,7 +20,7 @@ http://download.virtualbox.org/virtualbox/4.3.28/VirtualBox-4.3.28-100309-OSX.dm
 http://download.virtualbox.org/virtualbox/4.3.28/VirtualBox-4.3.28-100309-Win.exe (Windows)
 1. **Download and install** Vagrant for your OS: https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.dmg (mac)
 https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.msi (Windows)
-1. **Download** the Ubuntu_15.04 vagrant image that we have already pre-built from https://www.dropbox.com/s/b1zqdjyka9udkfv/package.box.zip?dl=0 (this is about 1.6Gb so may take a while)
+1. **Download** the Ubuntu_15.04 vagrant image that we have already pre-built from: https://www.dropbox.com/s/u0y6jq3iz2fjhfu/vagrant_ubuntu.zip?dl=0 (this is about 1.6Gb so may take a while)
 
 ## Setting up Ubuntu with Vagrant
 
@@ -28,13 +28,16 @@ https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.msi (Windows)
 Check that you have Vagrant installed successfully by running `vagrant --version`. You should see something like `Vagrant 1.7.2`.
 
 #### Download the Ubuntu vagrant image
-Unzip the Ubuntu_15.04 image that you previously downloaded.
-You should see a file called package.box.
+You should have previously downloaded a zipped folder called `vagrant_ubuntu` from Dropbox ([download link](https://www.dropbox.com/s/u0y6jq3iz2fjhfu/vagrant_ubuntu.zip?dl=0)).
+Unzip it, this will create a folder called `vagrant_ubuntu`. Inside the folder `vagrant_ubuntu`, and you should see a file called package.box.
 
 #### Install the Ubuntu box in Vagrant
-Open up a terminal and change into the directory to where you unzipped the image.
+Open up a terminal and change into the `vagrant_ubuntu` directory.
 
 ```bash
+$ cd ~/Downloads/vagrant_ubuntu/ (This might be a different location for you)
+$ ls
+package.box
 $ vagrant box add {boxname} package.box
 ```
 in our case:

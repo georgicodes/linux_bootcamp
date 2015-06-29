@@ -25,6 +25,7 @@ lib64/ media/ mnt/ opt/ proc/ root/ run/ sbin/
 srv/ sys/ tmp/ usr/ var/ vmlinuz vmlinuz.old 
 initrd.img initrd.img.old
 ```
+
 What we are seeing here is the root filesystem. 
 
 * You can read any file on the system using the `cat` command. We can view the contents of the same config file we viewed earlier.

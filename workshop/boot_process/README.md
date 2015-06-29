@@ -18,6 +18,7 @@ grub> ls
 
 From the [GRUB documentation](https://www.gnu.org/software/grub/manual/html_node/Device-syntax.html#Device-syntax):
 > The syntax `(hd0)` represents using the entire disk (or the MBR when installing GRUB), while the syntax `(hd0,1)` represents using the first partition of the disk (or the boot sector of the partition when installing GRUB).
+
 ```bash
 grub> ls (hd0,1)/
 lost+found/ bin/ boot/ cdrom/ dev/ etc/ home/  lib/
@@ -25,7 +26,6 @@ lib64/ media/ mnt/ opt/ proc/ root/ run/ sbin/
 srv/ sys/ tmp/ usr/ var/ vmlinuz vmlinuz.old 
 initrd.img initrd.img.old
 ```
-
 What we are seeing here is the root filesystem. 
 
 * You can read any file on the system using the `cat` command. We can view the contents of the same config file we viewed earlier.

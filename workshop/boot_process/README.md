@@ -5,11 +5,32 @@ The GRUB 2 command shell allows you to discover boot images, kernels, and root f
 
 Tab completion and history work in the GRUB shell.
 
-1. `reboot` Ubuntu
-1. very quickly as its booting up again drop into the Grub command shell by pressing `c`.
-1. `ls` as the `grub>` prompt. (The msdos stuff means this system has the old-style MS-DOS partition table, rather than the shiny new Globally Unique Identifiers partition table (GPT))
-1. `grub> ls (hd0,1)/` to list the files on the system. This is the root filesystem. We actually have complete access to all filesystems on the local machine regardless of permissions or other protections.
-1. Find where you checked out the `linux-workshop` GitHub repo and display the README by using the `cat` command.
+* `reboot` Ubuntu
+* When your system starts up hold down the `shift` key until a black screen with the GRUB menu appears. 
+* Drop into the Grub command shell by pressing `c`.
+![](http://pix.toile-libre.org/upload/original/1353953772.png)
+* `ls` as the `grub>` prompt. (The msdos stuff means this system has the old-style MS-DOS partition table, rather than the shiny new Globally Unique Identifiers partition table (GPT))
+```bash
+grub> ls
+(hd0) (hd0,msdos2) (hd0,msdos1)
+```
+* List the files on the system, the syntax looks a little quirky but we are specifying the partition we want to view with `ls (hd0,1)`. The grub `ls` command documentation is [here](https://www.gnu.org/software/grub/manual/html_node/ls.html). 
+From the [GRUB documentation](https://www.gnu.org/software/grub/manual/html_node/Device-syntax.html#Device-syntax):
+> The syntax `(hd0)` represents using the entire disk (or the MBR when installing GRUB), while the syntax `(hd0,1)` represents using the first partition of the disk (or the boot sector of the partition when installing GRUB).
+```bash
+grub> ls (hd0,1)/
+lost+found/ bin/ boot/ cdrom/ dev/ etc/ home/  lib/
+lib64/ media/ mnt/ opt/ proc/ root/ run/ sbin/ 
+srv/ sys/ tmp/ usr/ var/ vmlinuz vmlinuz.old 
+initrd.img initrd.img.old
+```
+What we are seeing here is the root filesystem. 
+* You can read any file on the system using the `cat` command. We can view the contents of the same config file we viewed earlier.
+```
+grub> cat (hd0,1)/boot/config-4.0.5-040005-generic
+```
+We actually have complete access to all filesystems on the local machine regardless of permissions or other protections.
+
 
 #### EXERCISE: Booting From grub>
 This is how to set the boot files and boot the system from the `grub>` prompt. We know from running the `ls` command that there is a Linux root filesystem on `(hd0,1)`, and you can keep searching until you verify where `/boot/grub` is. Then run these commands, using your own root partition, kernel, and initrd image:

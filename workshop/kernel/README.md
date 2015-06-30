@@ -41,12 +41,24 @@ CONFIG_LOCALVERSION_AUTO=y
 #### 2. EXERCISE: Customizing your kernel release string
 It's always fun to personalize things. The `CONFIG_LOCALVERSION_AUTO=y` config option we set previously allows us to append a version name to our kernel version string.
 
+* The version of the currently running kernel can be found by running:
+```bash
+$ uname -r
+4.0.5-040005-generic
+```
 * Update the `EXTRAVERSION` field in the `Makefile` found in the root of the kernel source tree. Adding your name here or something silly like `-rainbow-unicorns-rule`. This will be appended to your kernel version name string. Note, start this with a dash `-`.
 ```bash
 $ vi Makefile
+PATCHLEVEL = 0
+SUBLEVEL = 5
+EXTRAVERSION = -rainbow-unicorns-rule
+NAME = Hurr durr I'ma sheep
+
+# *DOCUMENTATION*
+........
 ```
 Whilst you are looking in the `Makefile`, take a look at the `NAME` field, what does it say? Kinda silly right - this is the name the Linux community voted on for this version of the Linux kernel :)
-* Now find out what the final kernel release string will be:
+* Now to find out what the final kernel release string will be if you build this kernel run:
 ```bash
 $ make kernelrelease
 4.0.5-rainbow-unicorns-rule

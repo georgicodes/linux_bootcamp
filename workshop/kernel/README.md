@@ -43,13 +43,17 @@ This command will likely produce several references to the version of the curren
 
 #### 1. EXERCISE: Fetch kernel source and create a kernel config file
 
-##### Download the kernel source
+##### Setup
 1. Open up a terminal (side bar blackbox icon).
 1. Switch to superuser `sudo -i`. This command switches your current terminal to be logged in as a superuser.
 1. Install curl as we are going to need it `sudo apt-get install curl`
 1. `cd /usr/src`. Kernel source is always stored in this directory.
-1. Fetch the latest stable kernel source from kernel.org. You can use the curl command to do this: `curl -O https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.5.tar.xz`. (File is about 85mg) OR if the internet is slow then we have already put this file in the home directory so you can just simply copy it across `cp /home/vagrant/handy_workshop_files/linux-4.0.5.tar.xz .`.
+
+##### Fetch the latest stable kernel source
+Ordinarily you would probably want to fetch your kernel sour from kernel.org but given conference wifi is often extremely slow, we've downloaded version 4.0.5 and included it in your vagrant image. You can find it in the home directory so you can just simply copy it across.
 ```bash
+# make sure you are in /usr/src then copy over the tarball
+cp /home/vagrant/handy_workshop_files/linux-4.0.5.tar.xz .
 # Unpack the tarball
 $ tar -xvf linux-4.0.5.tar.xz
 # list contents

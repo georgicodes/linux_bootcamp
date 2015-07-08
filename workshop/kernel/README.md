@@ -129,8 +129,20 @@ $ ls /lib/modules/$KERNEL_VERSION
 #### 5. EXERCISE: Boot into your new kernel
 Now your new kernel is built, let's boot into it! Your boot manager GRUB2 will automatically choose the latest kernel version to boot into.
 
+##### Edit grub config to make the menu appear at boot
+The GRUB2 menu doesn't appear automatically on Ubuntu. To make it appear we need to edit the grub config value. To do this:
+```bash
+# Open the grub config value. You will need to be in super user mode to edit and save this file hence the sudo
+sudo vi /etc/default/grub
+# change this from 0 to 5 and save the file
+GRUB_HIDDEN_TIMEOUT=5
+# this command is essential to apply the changes you made to the config file
+update-grub
+```
+
+##### Boot into GRUB menu and select kernel version
 * Type `reboot` from the terminal
-* When your system starts up hold down the shift key until a black screen with the GRUB menu appears. Select `Advanced Options for Debian GNU/Linux`
+* When your system starts up hold down the `SHIFT` key until a black screen with the GRUB menu appears. Select `Advanced Options for Debian GNU/Linux`
 * You will be presented with a list of kernel versions. The latest kernel version (the one you just installed) should be already selected, if its not then select it.
 * Once booted check for your custom kernel release string with `uname -r`.
 ```bash

@@ -30,6 +30,7 @@ Check that you have Vagrant installed successfully by running `vagrant --version
 #### Download the Ubuntu vagrant image
 You should have previously downloaded a zipped folder called `vagrant_ubuntu` from Dropbox ([download link](https://www.dropbox.com/s/u0y6jq3iz2fjhfu/vagrant_ubuntu.zip?dl=0)).
 Unzip it, this will create a folder called `vagrant_ubuntu`. Inside the folder `vagrant_ubuntu`, and you should see a file called package.box.
+![](images/finder_image.png)
 
 #### Install the Ubuntu box in Vagrant
 Open up a terminal and change into the `vagrant_ubuntu` directory.
@@ -55,6 +56,15 @@ in our case:
 $ vagrant init Ubuntu-Desktop-15.04
 ```
 If you list the contents of this directory (`ls`), you'll now see a new file that was created `Vagrantfile`.
+
+```bash
+$ ls -la
+total 3174080
+drwxr-xr-x@ 4 georgi  staff         136 Jul  7 20:59 .
+drwx------+ 6 georgi  staff         204 Jul  7 20:47 ..
+-rw-r--r--  1 georgi  staff        3032 Jul  7 20:59 Vagrantfile
+-rw-r--r--@ 1 georgi  staff  1625121290 Jun 18 12:01 package.box
+```
 
 #### Enable GUI
 We now need to enable the GUI, to do this either replace the `Vagrantfile` created with the one [here](https://raw.githubusercontent.com/GeorgiCodes/linux_bootcamp/master/downloads/vagrant_ubuntu_image/Vagrantfile), or edit the generated `Vagrantfile` by uncommenting the following lines and saving the file:

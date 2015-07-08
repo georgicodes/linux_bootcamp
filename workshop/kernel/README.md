@@ -2,12 +2,8 @@
 
 ## How to configure and build your own kernel
 
-#### 0. EXERCISE: What version of the kernel are you running?
-The Linux Information Project has a great tutorial on how to use various ways to find out your current kernel version number. Take your time to read about and run the commands.
-
-This has been copied from The Linux Information Project website for the purpose of this tutorial. http://www.linfo.org/find_kernel_version.html
-
-How to Find The Kernel Version
+#### 1. EXERCISE: What version of the kernel are you running?
+Parts of this have been copied from The Linux Information Project website for the purpose of this tutorial. http://www.linfo.org/find_kernel_version.html
 
 It can be useful to know the version number of the kernel (i.e., the core of the operating system) on a particular Linux system. Not only is it instructive in itself, but it can also be helpful in diagnosing and upgrading systems because each release of the kernel contains some differences, sometimes minor and sometimes substantial.
 
@@ -23,25 +19,7 @@ A second way is to look at the `/proc/version` file. This can be easily accompli
 
 `cat /proc/version`
 
-A third way is to use the rpm (i.e., Red Hat package manager) command with its -q (i.e., query) option and use the word kernel as an argument (i.e., input data) as follows:
-
-`rpm -q kernel`
-
-This method has the advantage that it provides output information solely about the kernel. However, it has the disadvantage that it only works on distributions (i.e., versions) of Linux that use the rpm package system, such as those based on Red Hat.
-
-A fourth method is to look at the contents of the dmesg command, which is used to report information about the system as it boots up (i.e., starts up). Because dmesg generates a large amount of output, it is convenient to first transfer that output using a pipe (represented by the vertical bar character) to the grep filter with the word Linux as an argument in order to display only lines that contain that word (and thus the kernel version information) as follows:
-
-`dmesg | grep Linux`
-
-The disadvantages of this method are that it requires some extra typing and that there is still a lot of output to search through even though it has been greatly reduced through the use of the grep filter.
-
-A fifth method is to look in directories in which the kernel or its source code (i.e., the original version as written by humans in a programming language) is kept. There can be differences among systems, and some systems might not contain the source code. However, the kernel frequently resides in the boot directory, and thus its name, which includes the version and release numbers, can be found by using the ls command (which lists the contents of a directory) with that directory as an argument as follows:
-
-`ls /boot`
-
-This command will likely produce several references to the version of the currently installed and running kernel. Among them should be an entry such as vmlinuz-2.4.20-6 (in the case of kernel version 2, major release 4, minor release 20). vmlinuz is a compressed Linux kernel, and it is bootable, which means that it is capable of loading the operating system into memory so that the computer becomes usable and application programs can be run.
-
-#### 1. EXERCISE: Fetch kernel source and create a kernel config file
+#### 2. EXERCISE: Fetch kernel source and create a kernel config file
 
 ##### Setup
 1. Open up a terminal (side bar blackbox icon).
@@ -54,7 +32,7 @@ Ordinarily you would probably want to fetch your kernel sour from kernel.org but
 ```bash
 # make sure you are in /usr/src then copy over the tarball
 cp /home/vagrant/handy_workshop_files/linux-4.0.5.tar.xz .
-# Unpack the tarball
+# Unpack the tarball: this will uncompress the file and create a new directory linux-4.0.5
 $ tar -xvf linux-4.0.5.tar.xz
 # list contents
 $ ls
@@ -81,7 +59,7 @@ $ cat .config | grep CONFIG_LOCALVERSION_AUTO
 CONFIG_LOCALVERSION_AUTO=y
 ```
 
-#### 2. EXERCISE: Customizing your kernel release string
+#### 3. EXERCISE: Customizing your kernel release string
 It's always fun to personalize things. The `CONFIG_LOCALVERSION_AUTO=y` config option we set previously allows us to append a version name to our kernel version string.
 
 * The version of the currently running kernel can be found by running:
@@ -95,7 +73,7 @@ $ vi Makefile
 PATCHLEVEL = 0
 SUBLEVEL = 5
 EXTRAVERSION = -rainbow-unicorns-rule
-NAME = Hurr durr I'ma sheep
+NAME = Hurr durr Ima sheep
 
 # *DOCUMENTATION*
 ........
@@ -107,7 +85,7 @@ $ make kernelrelease
 4.0.5-rainbow-unicorns-rule
 ```
 
-#### 2B. EXERCISE: Building your kernel - TO DO AT HOME!!
+#### 3B. EXERCISE: Building your kernel - TO DO AT HOME!!
 There are multiple ways that you can build and install your own kernel, here I have presented one way. This will install the new (compressed) kernel image into the `/boot` directory so that GRUB can find it at boot time.
 
 We will not do this in this workshop as building a kernel can take hours depending on how much grunt your laptop has!

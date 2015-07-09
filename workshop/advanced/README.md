@@ -2,22 +2,22 @@
 
 ### `strace`
 
-`strace` is a tool that can trace syscalls (system calls). These calls can be 
-intercepted and read, allowing for a better understanding of what a process is 
+`strace` is a tool that can trace syscalls (system calls). These calls can be
+intercepted and read, allowing for a better understanding of what a process is
 trying to do at a given runtime.
 
-Common times to use `strace` are to get to the bottom of _why_ something is 
+Common times to use `strace` are to get to the bottom of _why_ something is
 not working.
 
-Say a program is throwing a suspicious error. If you want to see what file the 
-program is opening, writing to, signals the program is passing etc, `strace` 
+Say a program is throwing a suspicious error. If you want to see what file the
+program is opening, writing to, signals the program is passing etc, `strace`
 is the easiest way.
 
 There are a few ways to run strace. Let's explore them.
 
 1. Run strace on `ls`
 
-Hopefully you are familiar with the unix command `ls`, if so then you can 
+Hopefully you are familiar with the unix command `ls`, if so then you can
 probably assume how it works. So to really dive in and see an example of `stace
 ` output lets run it on `ls`.
 
@@ -27,7 +27,7 @@ $ strace ls
 execve("/bin/ls", ["ls"], [/* 19 vars */]) = 0
 brk(0)                                  = 0x2486000
 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
-mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) =
 0x7f6dad1b0000
 access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
 open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
@@ -41,7 +41,7 @@ So you can see from that output exactly what the command is doing.
 
 2. Run strace on a PID
 
-You can run `strace` on a process without running the process directly with 
+You can run `strace` on a process without running the process directly with
 `strace`.
 
 ```console
@@ -90,8 +90,8 @@ $ docker ps
 
 The following is taken directly from [https://github.com/torvalds/linux/blob/master/Documentation/sysctl/README](https://github.com/torvalds/linux/blob/master/Documentation/sysctl/README). But it's a pretty great resource.
 
-`sysctl` is a means of configuring certain aspects of the kernel at run-time, 
-and the /proc/sys/ directory is there so that you don't even need special 
+`sysctl` is a means of configuring certain aspects of the kernel at run-time,
+and the /proc/sys/ directory is there so that you don't even need special
 tools to do it!
 
 In fact, there are only four things needed to use these config facilities:
@@ -101,9 +101,9 @@ In fact, there are only four things needed to use these config facilities:
 - common sense (this is especially hard to come by these days)
 - knowledge of what all those values mean
 
-As a quick 'ls /proc/sys' will show, the directory consists of several 
-(arch-dependent?) subdirs. Each subdir is mainly about one part of the kernel, 
-so you can do configuration on a piece by piece basis, or just some 'thematic 
+As a quick 'ls /proc/sys' will show, the directory consists of several
+(arch-dependent?) subdirs. Each subdir is mainly about one part of the kernel,
+so you can do configuration on a piece by piece basis, or just some 'thematic
 frobbing'.
 
 The subdirs are about:
@@ -141,7 +141,7 @@ fs.file-max = 1631327
 # open up /etc/sysctl.conf
 $ vim /etc/sysctl.conf
 
-# Increase size of file handles and inode cache
+# Increase size of file handles and inode cache by adding this line to the file
 fs.file-max = 2097152
 
 # save and quit (:wq)

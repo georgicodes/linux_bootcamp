@@ -28,7 +28,7 @@ https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.msi (Windows)
 #### Check Vagrant is installed
 Open up the Terminal program from Finder > Applications > Utilities > Terminal.
 Check that you have Vagrant installed successfully by typing `vagrant --version` in your Terminal and hitting enter. You should see something like `Vagrant 1.7.2`.
-![](images/vagrant_version.png)
+![](images/vagrant_finder.png)
 
 #### Download the Ubuntu vagrant image
 You should have previously downloaded a zipped folder called `vagrant_ubuntu` from Dropbox ([download link](https://www.dropbox.com/s/u0y6jq3iz2fjhfu/vagrant_ubuntu.zip?dl=0)).
@@ -135,8 +135,15 @@ Don't worry about those connection refused errors.
 
 Vagrant has now done its job and we will only use VirtualBox from now on.
 
-Open up VirutalBox and you will see and Ubuntu image called something like "vagrant_ubuntu_image_xxxxxx" listed on the left. Under the image name you will see the words "running" - this means that your Ubuntu image is up and running. You can shut it down at any time by pressing the red x on the Ubuntu window.
+Open up VirutalBox and you will see and Ubuntu image called something like "vagrant_ubuntu_image_xxxxxx" listed on the left. Under the image name you will see the words "running" - this means that your Ubuntu image is up and running.
 
 ![](images/vagrant_version.png)
 
 **The username and password for this Ubuntu image are both `vagrant`.**
+
+#### Starting up and shutting down your Ubuntu image
+ You can shut it down at any time by pressing the red x on the Ubuntu window.
+ ![](images/shutdown.png)
+
+ You can start it up by selecing the image name on the left and pressing the green Start button inside VirtualBox
+ ![](images/startup.png)

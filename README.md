@@ -45,7 +45,7 @@ package.box
 $ vagrant box add {boxname} package.box
 ```
 in our case:
-```
+```bash
 $ vagrant box add Ubuntu-Desktop-15.04 package.box
 ```
 This installed an Ubuntu box called `Ubuntu-Desktop-15.04` with Vagrant.
@@ -70,29 +70,73 @@ drwx------+ 6 georgi  staff         204 Jul  7 20:47 ..
 ```
 
 #### Enable GUI
-We now need to enable the GUI (Graphical User Interface). To do this edit the generated `Vagrantfile` by adding the following lines to the end of the file before the final line which says `end`.
+We now need to enable the GUI (Graphical User Interface). To do this edit the generated `Vagrantfile` with any text editor (Sublime, vi, Atom, TextEdit) by adding the following lines to the end of the file before the final line which says `end`.
 
 ```bash
-    config.vm.provider "virtualbox" do |v|
-        v.gui = true
-    end
+config.vm.provider "virtualbox" do |v|
+  v.gui = true
+end
 ```
+Your file should now look like this:
 
+![](images/vagrantfile.png)
+
+Alternativly, you can replace the `Vagrantfile` created with the one [here](https://raw.githubusercontent.com/GeorgiCodes/linux_bootcamp/master/downloads/vagrant_ubuntu_image/Vagrantfile).
 
 #### Spin it up!
-Now we've done all the necessary initialization steps to setup Ubuntu with Vagrant, from now on we only need to start it up and shut it down.
+We now have one final step to finish all the necessary initialization steps to setup Ubuntu with Vagrant.
 
-The username and password for this Ubuntu image are both `vagrant`.
+Firstly open up the VirtualBox program from your Finder in Applications > VirtualBox. We'll come back to this program in a second.
 
+Next, we run our final command:
 ```bash
 $ vagrant up
-```
-You should now see this:
-![](images/Vagrant_Ubuntu_Box.png)
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Importing base box 'Ubuntu-Desktop-15.04'...
+==> default: Matching MAC address for NAT networking...
+==> default: Setting the name of the VM: vagrant_ubuntu_default_1437153016907_32911
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 22 => 2222 (adapter 1)
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default: Warning: Connection timeout. Retrying...
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if its present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+==> default: Mounting shared folders...
+    default: /vagrant => /Users/georgi/Downloads/vagrant_ubuntu
+The following SSH command responded with a non-zero exit status.
+Vagrant assumes that this means the command failed!
 
-This should launch a Ubuntu 15.04 Desktop for use throughout the tutorial!
+/sbin/initctl emit --no-wait vagrant-mounted MOUNTPOINT=/vagrant
 
-When you want to shut it down run:
-```bash
-$ vagrant halt
+Stdout from the command:
+
+
+
+Stderr from the command:
+
+stdin: is not a tty
+initctl: Unable to connect to Upstart: Failed to connect to socket /com/ubuntu/upstart: Connection refused
 ```
+Don't worry about those connection refused errors.
+
+Vagrant has now done its job and we will only use VirtualBox from now on.
+
+Open up VirutalBox and you will see and Ubuntu image called something like "vagrant_ubuntu_image_xxxxxx" listed on the left. Under the image name you will see the words "running" - this means that your Ubuntu image is up and running. You can shut it down at any time by pressing the red x on the Ubuntu window.
+
+![](images/vagrant_version.png)
+
+**The username and password for this Ubuntu image are both `vagrant`.**

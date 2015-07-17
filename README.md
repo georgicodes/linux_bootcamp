@@ -142,8 +142,8 @@ Open up VirutalBox and you will see and Ubuntu image called something like "vagr
 **The username and password for this Ubuntu image are both `vagrant`.**
 
 #### Starting up and shutting down your Ubuntu image
- You can shut it down at any time by pressing the red x on the Ubuntu window.
- ![](images/shutdown.png)
+You can shut it down at any time by pressing the red x on the Ubuntu window.
+![](images/shutdown.png)
 
- You can start it up by selecing the image name on the left and pressing the green Start button inside VirtualBox
- ![](images/startup.png)
+You can start it up by selecing the image name on the left and pressing the green Start button inside VirtualBox
+![](images/startup.png)

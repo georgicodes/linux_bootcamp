@@ -9,6 +9,7 @@ Monday, July 20th 2015 at 9:00am to 12:30pm
 This GitHub repo contains an Ubuntu installation guide as well as all the workshop exercises.
 
 All workshop exercises can be found [here](workshop).
+All instructions below are for mac but they should be easily translatable to windows machines.
 
 ## Ubuntu Setup
 For this workshop, we will use a program called Vagrant to run a full copy of Ubuntu Desktop version 15.04 (the latest and greatest). Vagrant requires that VirtualBox be pre-installed and is a handy tool which allows users to load pre-installed software. If we didn't use Vagrant we'd have to spend a good chunk of the class just installing Ubuntu on VirutalBox which is pretty boring :)
@@ -25,7 +26,9 @@ https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.msi (Windows)
 ## Setting up Ubuntu with Vagrant
 
 #### Check Vagrant is installed
-Check that you have Vagrant installed successfully by running `vagrant --version`. You should see something like `Vagrant 1.7.2`.
+Open up the Terminal program from Finder > Applications > Utilities > Terminal.
+Check that you have Vagrant installed successfully by typing `vagrant --version` in your Terminal and hitting enter. You should see something like `Vagrant 1.7.2`.
+![](images/vagrant_version.png)
 
 #### Download the Ubuntu vagrant image
 You should have previously downloaded a zipped folder called `vagrant_ubuntu` from Dropbox ([download link](https://www.dropbox.com/s/u0y6jq3iz2fjhfu/vagrant_ubuntu.zip?dl=0)).
@@ -33,10 +36,10 @@ Unzip it, this will create a folder called `vagrant_ubuntu`. Inside the folder `
 ![](images/finder_image.png)
 
 #### Install the Ubuntu box in Vagrant
-Open up a terminal and change into the `vagrant_ubuntu` directory.
+From your Terminal, change into the `vagrant_ubuntu` directory.
 
 ```bash
-$ cd ~/Downloads/vagrant_ubuntu/ (This might be a different location for you)
+$ cd ~/Downloads/vagrant_ubuntu/ (This might be a different location for you)           # cd = change directory
 $ ls
 package.box
 $ vagrant box add {boxname} package.box
@@ -67,13 +70,14 @@ drwx------+ 6 georgi  staff         204 Jul  7 20:47 ..
 ```
 
 #### Enable GUI
-We now need to enable the GUI, to do this either replace the `Vagrantfile` created with the one [here](https://raw.githubusercontent.com/GeorgiCodes/linux_bootcamp/master/downloads/vagrant_ubuntu_image/Vagrantfile), or edit the generated `Vagrantfile` by uncommenting the following lines and saving the file:
+We now need to enable the GUI (Graphical User Interface). To do this edit the generated `Vagrantfile` by adding the following lines to the end of the file before the final line which says `end`.
 
 ```bash
     config.vm.provider "virtualbox" do |v|
-    v.gui = true
+        v.gui = true
     end
 ```
+
 
 #### Spin it up!
 Now we've done all the necessary initialization steps to setup Ubuntu with Vagrant, from now on we only need to start it up and shut it down.

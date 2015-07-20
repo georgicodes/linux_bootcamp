@@ -4,6 +4,7 @@
 
 - `parted`
 - `fsck`
+-  mount
 
 #### `parted`
 
@@ -45,90 +46,46 @@ on standard output.
 $ parted /dev/sda 'print'
 ```
 
-2. Create a new partition
+2. Create an aufs mount
 
 ```console
-# bring up the parted menu
-$ parted /dev/sda
+# install aufs tools
+$ apt-get install aufs-tools
 
-GNU Parted 2.3
-Using /dev/sda
-Welcome to GNU Parted! Type 'help' to view a list of commands.
-(parted) help                                                             
-  align-check TYPE N                        check partition N for TYPE(min|opt) alignment
-  check NUMBER                             do a simple check on the file system
-  cp [FROM-DEVICE] FROM-NUMBER TO-NUMBER   copy file system to another partition
-  help [COMMAND]                           print general help, or help on COMMAND
-  mklabel,mktable LABEL-TYPE               create a new disklabel (partition table)
-  mkfs NUMBER FS-TYPE                      make a FS-TYPE file system on partition NUMBER
-  mkpart PART-TYPE [FS-TYPE] START END     make a partition
-  mkpartfs PART-TYPE FS-TYPE START END     make a partition with a file system
-  resizepart NUMBER END                    resize partition NUMBER
-  move NUMBER START END                    move partition NUMBER
-  name NUMBER NAME                         name partition NUMBER as NAME
-  print [devices|free|list,all|NUMBER]     display the partition table, available devices, free
-        space, all found partitions, or a particular partition
-  quit                                     exit program
-  rescue START END                         rescue a lost partition near START and END
-  resize NUMBER START END                  resize partition NUMBER and its file system
-  rm NUMBER                                delete partition NUMBER
-  select DEVICE                            choose the device to edit
-  set NUMBER FLAG STATE                    change the FLAG on partition NUMBER
-  toggle [NUMBER [FLAG]]                   toggle the state of FLAG on partition NUMBER
-  unit UNIT                                set the default unit to UNIT
-  version                                  display the version number and copyright information of
-        GNU Parted
+$ mkdir /tmp/dir1
+$ touch /tmp/dir1/file_in_dir_1
+$ ls /tmp/dir1
 
+$ ls /home/vagrant
 
-# run mkpart to create a new partition
-(parted) (parted) mkpart
-Partition name?  []?                                                      
-File system type?  [ext2]?                                                
-Start? 1048                                                               
-End? 8930293                                                              
-Error: The location 8930293 is outside of the device /dev/vda.            
-(parted) mkpart                                                        
-Partition name?  []?                                                      
-File system type?  [ext2]?                                                
-Start? 1048                                                               
-End? 12342                                                                
-Warning: You requested a partition from 1048MB to 12.3GB.                 
-The closest location we can manage is 172GB to 172GB.
-Is this still acceptable to you?
-Yes/No? y                                                                               
+$ mkdir /tmp/aufs-root
 
-# view the new partition
-(parted) print all                                                        
-Model: Virtio Block Device (virtblk)
-Disk /dev/sda: 172GB
-Sector size (logical/physical): 512B/512B
-Partition Table: gpt
+# mount the home dir as a union mount
+$ mount -t aufs -o br=/tmp/dir1:/home/vagrant none /tmp/aufs-root/
 
-Number  Start   End    Size   File system  Name     Flags
- 1      1049kB  172GB  172GB  ext4         primary
- 2      172GB   172GB  512B
+$ ls /tmp/aufs-root
+# this will have the contents of /home/vagrant and /tmp/dir1
 
-# quit
-(parted) q                                                                
-Information: You may need to update /etc/fstab.  
+# unmount
+$ umount /tmp/aufs-root
 ```
 
-2. Check a specific device node
+3. Check a specific device node
 
 ```console
-$ fsck /dev/sda2
+$ fsck /dev/sda1
 fsck from util-linux 2.25.2
 e2fsck 1.42.9 (4-Feb-2014)
-/dev/sda2: clean, 95/2240224 files, 3793506/4476416 blocks
+/dev/sda1: clean, 95/2240224 files, 3793506/4476416 blocks
 ```
 
-3. Get the exit code
+4. Get the exit code
 
 ```console
 $ echo $?
 ```
 
-4. Translate the code
+5. Translate the code
 
 | Code | Meaning                            |
 |------|------------------------------------|
@@ -143,7 +100,7 @@ $ echo $?
 
 > **Note:** should probably be a `0`
 
-5. Check all filesystems in one run
+6. Check all filesystems in one run
 
 ```console
 #  check the filesystem in the order given by the 
@@ -169,7 +126,7 @@ e2fsck 1.42.9 (4-Feb-2014)
 /dev/sda2: clean, 95/2240224 files, 3793506/4476416 blocks
 ```
 
-6. Check only a specific filesystem type
+7. Check only a specific filesystem type
 
 ```console
 # check only on ext4

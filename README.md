@@ -16,12 +16,11 @@ For this workshop, we will use a program called Vagrant to run a full copy of Ub
 
 ## Prerequsites
 1. Free up around 10GB's on your laptop to get started.
-1. **Download and install** VirtualBox 4.3.26 for your OS:
-http://download.virtualbox.org/virtualbox/4.3.28/VirtualBox-4.3.28-100309-OSX.dmg (mac)
-http://download.virtualbox.org/virtualbox/4.3.28/VirtualBox-4.3.28-100309-Win.exe (Windows)
-1. **Download and install** Vagrant for your OS: https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.dmg (mac)
-https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.msi (Windows)
-1. **Download** the Ubuntu_15.04 vagrant image that we have already pre-built from: https://www.dropbox.com/s/u0y6jq3iz2fjhfu/vagrant_ubuntu.zip?dl=0 (this is about 1.6Gb so may take a while)
+2. It's important that you download the 3 files from the OSCON servers so as not to overload the conference wi-fi connection. 
+3. Please go to http://10.10.32.101 to download the following:
+1. **Download and install** VirtualBox 4.3.26 for your OS
+1. **Download and install** Vagrant for your OS
+1. **Download** the Ubuntu_15.04 vagrant image that we have already pre-built
 
 ## Setting up Ubuntu with Vagrant
 

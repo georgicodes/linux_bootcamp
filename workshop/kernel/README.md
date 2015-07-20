@@ -228,10 +228,16 @@ power management:
 * Run `cat /proc/sys/kernel/hostname` to see what the hostname is currently set too.
 * Write to the same file and update the hostname to be "Linux-or-death" or something else of your choice.
 ```bash
+# you'll notice the hostname is "vagrant-VirtualBox"
+$ hostname
+vagrant-VirtualBox
 $ cat /proc/sys/kernel/hostname
 vagrant-VirtualBox
+# let's change it by echoing a string into the hostname file on the proc filesystem
 $ echo "linux-or-death" > /proc/sys/kernel/hostname
 $ cat /proc/sys/kernel/hostname
+linux-or-death
+$ hostname
 linux-or-death
 ```
 
@@ -330,7 +336,7 @@ Let's our our hi kernel module to load automatically on boot. Remember kernel mo
 
 ```bash
 # First we need to copy the build module file to the /lib/modules directory
-$ cd linux_bootcamp/workshop/kernel/code/hi
+$ cd /home/vagrant/handy_workshop_files/linux_bootcamp/workshop/kernel/code/hi
 $ cp hi.ko /lib/modules/`uname -r`
 # Run the depmod command which let's the kernel know about new modules
 $ depmod -a
@@ -347,11 +353,11 @@ mac_hid                16384  0
 hi                     16384  0
 ```
 
-#### 11. EXERCISE: Load a character device driver
+#### 11. EXERCISE: Load a character device driver - TO DO AT HOME
 
 ```bash
 # change into the right directory
-$ cd linux_bootcamp/workshop/kernel/code/char_mod
+$ cd /home/vagrant/handy_workshop_files/linux_bootcamp/workshop/kernel/code/char_mod
 # build and load `hello_char.c`
 $ make
 $ insmod hello-char.ko

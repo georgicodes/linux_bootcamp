@@ -24,7 +24,6 @@ A second way is to look at the `/proc/version` file. This can be easily accompli
 ##### Setup
 1. Open up a terminal (side bar blackbox icon).
 1. Switch to superuser `sudo -i`. This command switches your current terminal to be logged in as a superuser.
-1. Install curl as we are going to need it `sudo apt-get install curl`
 1. `cd /usr/src`. Kernel source is always stored in this directory.
 
 ##### Fetch the latest stable kernel source
@@ -273,11 +272,8 @@ Read the description, what does it say?
 ```bash
 # ensure you are in sudo mode
 $ sudo -i
-# install git package
-$ apt-get install git
-# checkout the repository
-$ git clone https://github.com/GeorgiCodes/linux_bootcamp
-$ cd linux_bootcamp/workshop/kernel/code/hi
+# we've placed the kernel base code in the following directory
+$ cd /home/vagrant/handy_workshop_files/linux_bootcamp/workshop/kernel/code/hi
 # you'll see two files, the C code and the Makefile
 $ ls -la
 total 16

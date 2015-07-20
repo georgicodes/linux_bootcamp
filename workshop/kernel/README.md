@@ -286,10 +286,9 @@ drwxr-xr-x 4 root root 4096 Jun 13 09:18 ..
 -rw-r--r-- 1 root root  560 Jun 13 09:18 hi.c
 -rw-r--r-- 1 root root  273 Jun 13 09:18 Makefile
 ```
-* Let's install `vim` which is an improved version of the popular `vi` text editor `apt-get install vim`. Vim provides nice syntax colors.
 
 ##### Let's Code!
-* open up the c code file `vim hi.c`
+* open up the c code file `vi hi.c`
 * update the license information to have your name.
 ```bash
 MODULE_AUTHOR("YOUR NAME");

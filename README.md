@@ -9,63 +9,51 @@ Monday, July 20th 2015 at 9:00am to 12:30pm
 This GitHub repo contains an Ubuntu installation guide as well as all the workshop exercises.
 
 All workshop exercises can be found [here](workshop).
-All instructions below are for mac but they should be easily translatable to windows machines.
+All instructions below are for MAC OS but they should be easily translatable to Windows/Linux machines.
 
 ## Ubuntu Setup
 For this workshop, we will use a program called Vagrant to run a full copy of Ubuntu Desktop version 15.04 (the latest and greatest). Vagrant requires that VirtualBox be pre-installed and is a handy tool which allows users to load pre-installed software. If we didn't use Vagrant we'd have to spend a good chunk of the class just installing Ubuntu on VirutalBox which is pretty boring :)
 
 ## Prerequsites
 1. Free up around 10GB's on your laptop to get started.
-2. It's important that you download the 3 files from the OSCON servers so as not to overload the conference wi-fi connection. 
-3. Please go to http://10.10.32.101 to download the following:
-1. **Download and install** VirtualBox 4.3.26 for your OS
-1. **Download and install** Vagrant for your OS
-1. **Download** the Ubuntu_15.04 vagrant image that we have already pre-built
+2. It's important that you download the following software:
+1. **Download and install** [VirtualBox for your OS](https://www.virtualbox.org/wiki/Downloads)
+1. **Download and install** [Vagrant for your OS](https://www.vagrantup.com/downloads)
+3. **Navigate to** the latest [Ubuntu Vagrant Box](https://app.vagrantup.com/ubuntu) and note the name. i.e: `ubuntu/focal64`
 
 ## Setting up Ubuntu with Vagrant
 
 #### Check Vagrant is installed
 Open up the Terminal program from Finder > Applications > Utilities > Terminal.
-Check that you have Vagrant installed successfully by typing `vagrant --version` in your Terminal and hitting enter. You should see something like `Vagrant 1.7.2`.
+Check that you have Vagrant installed successfully by typing `vagrant --version` in your Terminal and hitting enter. You should see something like `Vagrant 1.7.2` [By the time this tutorial is written, it can differ].
 ![](images/vagrant_finder.png)
+)
 
-#### Download the Ubuntu vagrant image
-You should have previously downloaded a zipped folder called `vagrant_ubuntu` from Dropbox ([download link](https://www.dropbox.com/s/u0y6jq3iz2fjhfu/vagrant_ubuntu.zip?dl=0)).
-Unzip it, this will create a folder called `vagrant_ubuntu`. Inside the folder `vagrant_ubuntu`, and you should see a file called package.box.
-![](images/finder_image.png)
-
-#### Install the Ubuntu box in Vagrant
-From your Terminal, change into the `vagrant_ubuntu` directory.
+#### Creating a directory to initiate a Ubuntu Vagrant Box
+From your Terminal, create a directory as `vagrant_ubuntu`.
 
 ```bash
-$ cd ~/Downloads/vagrant_ubuntu/ (This might be a different location for you)           # cd = change directory
-$ ls
-package.box
-$ vagrant box add {boxname} package.box
+$ cd ~/Desktop (This might be a different location for you)           # cd = change directory
+$ mkdir vagrant_ubuntu                                                # mkdir = make directory
+$ cd vagrant_ubuntu
 ```
-in our case:
-```bash
-$ vagrant box add Ubuntu-Desktop-15.04 package.box
-```
-This installed an Ubuntu box called `Ubuntu-Desktop-15.04` with Vagrant.
 
-#### Init the Vagrant box
+#### Initialize the Vagrant box
 ```
-$ vagrant init {boxname}
+$ vagrant init {latest_ubuntu_vagrant_box}
 ```
 in our case:
 ```
-$ vagrant init Ubuntu-Desktop-15.04
+$ vagrant init ubuntu/focal64
 ```
 If you list the contents of this directory (`ls`), you'll now see a new file that was created `Vagrantfile`.
 
 ```bash
 $ ls -la
-total 3174080
+total 3372
 drwxr-xr-x@ 4 georgi  staff         136 Jul  7 20:59 .
 drwx------+ 6 georgi  staff         204 Jul  7 20:47 ..
 -rw-r--r--  1 georgi  staff        3032 Jul  7 20:59 Vagrantfile
--rw-r--r--@ 1 georgi  staff  1625121290 Jun 18 12:01 package.box
 ```
 
 #### Enable GUI
@@ -80,18 +68,18 @@ Your file should now look like this:
 
 ![](images/vagrantfile.png)
 
-Alternativly, you can replace the `Vagrantfile` created with the one [here](https://raw.githubusercontent.com/GeorgiCodes/linux_bootcamp/master/downloads/vagrant_ubuntu_image/Vagrantfile).
-
 #### Spin it up!
 We now have one final step to finish all the necessary initialization steps to setup Ubuntu with Vagrant.
 
 Firstly open up the VirtualBox program from your Finder in Applications > VirtualBox. We'll come back to this program in a second.
 
+**Note:** This command can take some time depending on your Network connection, as it's downloading Ubuntu.
+
 Next, we run our final command:
 ```bash
 $ vagrant up
 Bringing machine 'default' up with 'virtualbox' provider...
-==> default: Importing base box 'Ubuntu-Desktop-15.04'...
+==> default: Importing base box 'ubuntu/focal64'...
 ==> default: Matching MAC address for NAT networking...
 ==> default: Setting the name of the VM: vagrant_ubuntu_default_1437153016907_32911
 ==> default: Clearing any previously set network interfaces...

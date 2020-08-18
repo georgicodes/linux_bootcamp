@@ -27,7 +27,10 @@ A second way is to look at the `/proc/version` file. This can be easily accompli
 1. `cd /usr/src`. Kernel source is always stored in this directory.
 
 ##### Fetch the latest stable kernel source
-Ordinarily you would probably want to fetch your kernel sour from kernel.org but given conference wifi is often extremely slow, we've downloaded version 4.0.5 and included it in your vagrant image. You can find it in the home directory so you can just simply copy it across.
+Ordinarily you would probably want to fetch your kernel source from kernel.org but given conference wifi is often extremely slow, we've downloaded version 4.0.5 and included it in your vagrant image. You can find it in the home directory so you can just simply copy it across.
+
+**Note (For people not present in the workshop) :** If you would like to download the kernel source tree, you can downlaod it from here: https://www.kernel.org/ in a `tarball` / `.tar.xz` format and follow the instructions below with that file.
+
 ```bash
 # make sure you are in /usr/src then copy over the tarball
 cp /home/vagrant/handy_workshop_files/linux-4.0.5.tar.xz .
@@ -98,6 +101,19 @@ make install 	#  Install the new (compressed) kernel image into the `/boot` dire
 
 #### 4. EXERCISE: Install a pre-built kernel
 As it will take too long build a kernel in this workshop, we've done this step for you, so for this exercise we will install it.
+
+**Note:** To download the pre-build kernel, You would have to:
+
+- Navigate to [https://kernel.ubuntu.com/~kernel-ppa/mainline/](https://kernel.ubuntu.com/~kernel-ppa/mainline/) It's were the Mainline kernels for Ubuntu lives.
+- Select the directory of the Kernel version you would like to download.
+- Once there, click on `amd64` (It's the CPU architecture).
+- In that directory, you will be able to find all the `.deb` files for the Mainline Kernel
+- You only have to download the `.deb` files which has a `-generic` at the end, which typically includes:
+    - `linux-headers`
+    - `linux-modules`
+    - `linux-image`
+- And you would also have to download the `linux-headers-x.x-x-xxxxx_all.deb`
+- And we will store the 4 files in the `/home/vagrant/handy_workshop_files/mainline_kernel_debs` and follow the instructions below.
 
 ##### Install the kernel
 ```bash
